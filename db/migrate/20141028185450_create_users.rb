@@ -2,8 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :user
-      t.string :password            
-      t.belongs_to :junior_enterprises
+      t.string :password
       t.timestamps
     end
   end

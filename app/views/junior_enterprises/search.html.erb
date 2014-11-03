@@ -1,0 +1,50 @@
+<div id="layout-container">    
+  <%= render 'layouts/findmenu' %>
+  <div id="main" style="left: 200px !important;">  
+    <div class="head-title">
+    </div>
+  <div class="menu-switch">
+    <i class="fa fa-bars"></i>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+    </div>
+  </div>
+  <div class="margin-container">
+    <div class="scrollable wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-heading">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="profile-info col-lg-9 col-lg-offset-1">                  
+          <div class="panel">
+            <div class="bio-graph-heading">
+               Lobortis orci ac, consequat erat. Ut feugiat, quam id tempus tempor, nunc est malesuada libero. 
+            </div>
+            <div class="panel-body bio-graph-info">
+              <div id="accordion3" class="panel-group accordion accordion-semi">
+                <% @je.each do |je| %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"> <a href="#ac3-2" data-parent="#accordion3" data-toggle="collapse" class="collapsed"> <i class="fa fa-angle-right"></i> <%= je.name %> </a> </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="ac3-2">
+                      <div class="panel-body"> <%= je.description %> </div>
+                      <button onclick="window.location.href='junior_enterprise/<%= je.id %>'" class="btn btn-success" data-toggle="button"><i class="fa fa-search"></i> </button>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+</div>
+<style>
+  .bio-row {width:25%; text-align:center;}
+</style>

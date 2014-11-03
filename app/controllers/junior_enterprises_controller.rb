@@ -1,24 +1,34 @@
-class JuniorEnterprisesController < ApplicationController
-  before_action :set_junior_enterprise, only: [:show, :edit, :update, :destroy]
+class JuniorEnterprisesController < ApplicationController  
+  before_action :set_junior_enterprise, only: [:edit, :update, :destroy]
 
   # GET /junior_enterprises
   # GET /junior_enterprises.json
   def index
     @junior_enterprises = JuniorEnterprise.all
+    if is_admin?
+      render template: "admin/junior_enterprise_index"
+    end 
   end
 
   # GET /junior_enterprises/1
   # GET /junior_enterprises/1.json
   def show
+    @junior_enterprise = JuniorEnterprise.find(params[:id])
   end
 
   # GET /junior_enterprises/new
   def new
     @junior_enterprise = JuniorEnterprise.new
+    if is_admin?
+      render template: "admin/junior_enterprise_new"
+    end 
   end
 
   # GET /junior_enterprises/1/edit
   def edit
+    if is_admin?
+      render template: "admin/junior_enterprise_edit"
+    end 
   end
 
   # POST /junior_enterprises
@@ -28,11 +38,15 @@ class JuniorEnterprisesController < ApplicationController
 
     respond_to do |format|
       if @junior_enterprise.save
-        format.html { redirect_to @junior_enterprise, notice: 'Junior enterprise was successfully created.' }
-        format.json { render :show, status: :created, location: @junior_enterprise }
+        current_user.junior_enterprise = @junior_enterprise
+        current_user.save
+        if is_admin?
+          format.html { redirect_to "/admin/junior_enterprises"}
+        else
+          format.html { redirect_to "/dashboard"}
+        end
       else
         format.html { render :new }
-        format.json { render json: @junior_enterprise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +56,13 @@ class JuniorEnterprisesController < ApplicationController
   def update
     respond_to do |format|
       if @junior_enterprise.update(junior_enterprise_params)
-        format.html { redirect_to @junior_enterprise, notice: 'Junior enterprise was successfully updated.' }
-        format.json { render :show, status: :ok, location: @junior_enterprise }
+        if is_admin?          
+          format.html { redirect_to "/admin/junior_enterprises"}
+        else          
+          format.html { redirect_to "/junior_enterprises/edit"}
+        end
       else
         format.html { render :edit }
-        format.json { render json: @junior_enterprise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,19 +72,53 @@ class JuniorEnterprisesController < ApplicationController
   def destroy
     @junior_enterprise.destroy
     respond_to do |format|
-      format.html { redirect_to junior_enterprises_url, notice: 'Junior enterprise was successfully destroyed.' }
-      format.json { head :no_content }
+      if is_admin?        
+        format.html { redirect_to "/admin/junior_enterprises" }
+      else        
+        format.html { redirect_to "/log_out" }
+      end
+    end
+  end
+
+  def dashboard
+    if current_user.junior_enterprise == nil
+      redirect_to "/junior_enterprises/new"
+    end
+  end
+
+  def find
+  end
+
+  def search
+    @je = JuniorEnterprise.all
+
+    if params[:name]
+      unless params[:name].blank?
+        @je = @je.where(["name = :name", { name: params[:name]}])
+      end
+    end
+
+    if params[:state]
+      unless params[:state].blank?
+        @je = @je.where(["state = :state", { state: params[:state]}])
+      end
+    end
+
+    if params[:tags]
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_junior_enterprise
-      @junior_enterprise = JuniorEnterprise.find(params[:id])
+      if is_admin?
+        @junior_enterprise = JuniorEnterprise.find(params[:id])
+      else
+        @junior_enterprise = current_user.junior_enterprise
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def junior_enterprise_params
-      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state)
+      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube)
     end
 end

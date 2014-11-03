@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028190451) do
+ActiveRecord::Schema.define(version: 20141030044949) do
 
   create_table "junior_enterprises", force: true do |t|
     t.string   "name"
+    t.integer  "user_id"
     t.string   "logo"
     t.text     "description"
     t.text     "phrase"
@@ -24,24 +25,30 @@ ActiveRecord::Schema.define(version: 20141028190451) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "youtube"
+    t.string   "facebook"
+    t.string   "course"
   end
 
+  add_index "junior_enterprises", ["user_id"], name: "index_junior_enterprises_on_user_id"
+
   create_table "members", force: true do |t|
-    t.integer  "junior_enterprises_id"
     t.string   "name"
     t.string   "photo"
     t.string   "position"
+    t.integer  "junior_enterprise_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "members", ["junior_enterprise_id"], name: "index_members_on_junior_enterprise_id"
+
   create_table "users", force: true do |t|
-    t.string   "user"
     t.string   "password"
-    t.integer  "junior_enterprises_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "type"
+    t.string   "function"
+    t.string   "email"
   end
 
 end

@@ -1,17 +1,63 @@
 Rails.application.routes.draw do
   root 'session#index'
 
-  get "log_in" => "session#new"
+  
+  #Base/Session Routes
+  get "log_in" => "session#new", :as => "log_in"
 
   post "log_in" => "session#create"
 
   get "log_out" => "session#destroy"
 
-  resources :members
+  #Members
 
-  resources :junior_enterprises
+  get "/members/new" => "members#new", :as => "new_member"
+  post "/members" => "members#create", :as => "create_member"
+  get "/members" => "members#index", :as => "members"
+  get "/member/:id" => "members#show", :as => "member"
+  patch '/member/:id' => "members#update", :as => 'update_member'
 
-  resources :users
+
+  #Junior Enterprises Routes
+
+  get "/junior_enterprises/new" => "junior_enterprises#new", :as => "new_junior_enterprise"
+  post "/junior_enterprises" => "junior_enterprises#create", :as => "create_junior_enterprise"
+  get "/junior_enterprises/edit" => "junior_enterprises#edit", :as => "edit_junior_enterprise"
+  patch "/junior_enterprise" => "junior_enterprises#update", :as => "update_junior_enterprise"
+  get "/junior_enterprises" => "junior_enterprises#index", :as => "junior_enterprises"
+  get "/junior_enterprise/:id" => "junior_enterprises#show", :as => "junior_enterprise"
+  get "/dashboard" => "junior_enterprises#dashboard", :as => "dashboard"
+  get "/find" => "junior_enterprises#find", :as => "find"
+  get "/search" => "junior_enterprises#search", :as => "search"
+
+  #Admin Routes
+
+  get '/admin/junior_enterprises' => "junior_enterprises#index"
+  get '/admin/junior_enterprises/edit/:id' => "junior_enterprises#edit"
+  get '/admin/junior_enterprises/new' => "junior_enterprises#new"
+  get '/admin/junior_enterprises/delete/:id' => "junior_enterprises#destroy"  
+  patch "/junior_enterprise/:id" => "junior_enterprises#update"
+
+  get '/admin/users' => "users#index", :as => 'admin_users'
+  get '/admin/users/edit/:id' => "users#edit"
+  get '/admin/users/new' => "users#new"
+  get '/admin/users/delete/:id' => "users#destroy"
+
+  get '/admin/members' => "members#index"
+  get '/admin/members/edit/:id' => "members#edit"
+  get '/admin/members/new' => "members#new"
+  get '/admin/members/delete/:id' => "members#destroy"
+
+  #Users Routes
+
+    #delete "/user" => "users#destroy", :as => "destroy_user"#
+  get "/users/new" => "users#new", :as => "new_user"
+  post "/users" => "users#create", :as => "create_user"
+  get "/users" => "users#index", :as => "users"
+  get "/user/:id" => "users#show", :as => "user"
+  get "/recover" => "users#recover", :as => "recover"  
+  post "/recover" => "users#recover_email"
+  patch '/user/:id' => "users#update", :as => 'update_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,4 +1,5 @@
 class JuniorEnterprise < ActiveRecord::Base
-	has_one :user
-	has_many :members
+    belongs_to :junior_enterprise
+	has_many :members	
+	mount_uploader :logo, ImageUploader
 end

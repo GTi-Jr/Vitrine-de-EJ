@@ -2,6 +2,7 @@ class CreateJuniorEnterprises < ActiveRecord::Migration
   def change
     create_table :junior_enterprises do |t|
       t.string :name
+      t.integer :user_id
       t.string :logo
       t.text :description
       t.text :phrase
@@ -11,5 +12,6 @@ class CreateJuniorEnterprises < ActiveRecord::Migration
       t.string :state
       t.timestamps
     end
+    add_index :junior_enterprises, :user_id
   end
 end

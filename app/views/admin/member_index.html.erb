@@ -1,0 +1,51 @@
+<div id="layout-container">
+  <div id="main">  
+    <%= render 'layouts/adminheadmenu' %>
+    <div class="margin-container">
+      <div class="scrollable wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-heading">
+              <h1>Membros</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box-info">
+            <a href="/admin/members/new" class="btn btn-primary">Novo Membro</a>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Empresa</th>
+                    <th>Foto</th>                    
+                    <th></th>                    
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @members.each do |m| %>
+                    <tr>
+                      <td><%= m.name %></td>
+                      <td><%= m.position %></td>
+                      <% if m.junior_enterprise_id == nil %>
+                        <td></td>
+                      <% else %>
+                        <td><%= JuniorEnterprise.find(m.junior_enterprise_id).name %></td>
+                      <% end %>
+                      <td><%= image_tag(m.photo_url, style: "width:120px; height:120px ") %></td>
+                      <td style="text-align:center"><a href="/admin/members/edit/<%= m.id %>" class="btn btn-warning" type="button">Editar</a></td>
+                      <td style="text-align:center"><a href="/admin/members/delete/<%= m.id %>" class="btn btn-danger" type="button">Deletar</a></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>

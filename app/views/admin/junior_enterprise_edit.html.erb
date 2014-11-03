@@ -1,0 +1,142 @@
+<div id="layout-container">
+  <div id="main">  
+    <%= render 'layouts/adminheadmenu' %>
+    <div class="margin-container">
+    <div class="scrollable wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-heading">
+            <h1><b>Editar Empresa Junior</b></h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="box-info">
+            <table align="center" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+              <tr>
+                <td>
+                  <div>
+                    <div id="wizard" class="swMain">
+                        <%= form_for(@junior_enterprise) do |f| %>
+                          <% flash.each do |name, msg| %>      
+                            <% if msg.is_a?(String) %>
+                              <% if flash[:error] -%>
+                                <div class="alert alert-danger" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                </div>
+                              <% end %>
+
+                              <% if flash[:alert] -%>
+                                <div class="alert alert-warning" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                </div>
+                              <% end %>
+
+                              <% if flash[:notice] -%>
+                                <div class="alert alert-success" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+
+                          <ul class="anchor">
+                            <li>
+                              <a class="selected">
+                                <span class="stepDesc">Dados<br></span>
+                              </a>
+                            </li>
+                          </ul>
+                          <div id="step-1" style="display: block; left: 0px;">
+                            <table cellspacing="3" cellpadding="3" align="center">
+                              <tbody>
+                                <tr>
+                                  <td align="center" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Nome</td>
+                                  <td align="left">
+                                    <%= f.text_field :name, class: "txtBox", placeholder: "Nome"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Frase de Efeito</td>
+                                  <td align="left">
+                                    <%= f.text_field :phrase, class: "txtBox", placeholder: "Frase"  %>
+                                  </td>
+                                </tr>                                
+                                <tr>
+                                  <td align="right">Descrição</td>
+                                  <td align="left">
+                                    <%= f.text_field(:description, class: "txtBox", placeholder: "Descrição", size: 20)  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Site</td>
+                                  <td align="left">
+                                    <%= f.text_field :site, class: "txtBox", placeholder: "Site"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Telefone</td>
+                                  <td align="left">
+                                    <%= f.text_field :phone, class: "txtBox", placeholder: "Telefone"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Facebook</td>
+                                  <td align="left">
+                                    <%= f.text_field :facebook, class: "txtBox", placeholder: "Facebook"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Youtube</td>
+                                  <td align="left">
+                                    <%= f.text_field :youtube, class: "txtBox", placeholder: "Youtube"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Cidade</td>
+                                  <td align="left">
+                                    <%= f.text_field :city, class: "txtBox", placeholder: "Cidade"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Estado</td>
+                                  <td align="left">                                    
+                                    <%= select_tag "junior_enterprise[state]", "<option>Acre</option><option>Alagoas</option><option>Amapá</option><option>Amazonas</option><option>Bahia</option><option>Ceará</option><option>Distrito Federal</option><option>Espirito Santo</option><option>Goiás</option><option>Maranhão</option><option>Mato Grosso</option><option>Mato Grosso do Sul</option><option>Minas Gerais</option><option>Pará</option><option>Paraíba</option><option>Paraná</option><option>Pernambuco</option><option>Piauí</option><option>Rio de Janeiro</option><option>Rio Grande do Norte</option><option>Rio Grande do Sul</option><option>Rondônia</option><option>Roraima</option><option>Santa Catarina</option><option>São Paulo</option><option>Sergipe</option><option>Tocantins</option>".html_safe, class: 'form-control' %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Logo</td>
+                                  <td align="left">
+                                    <%= f.file_field :logo, class: "txtBox" %>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <br>
+                          <div class="stepContainer" style="height: 179px;"></div>
+                          <div class="actionBar">
+                            <%= submit_tag "Editar",:class=> 'buttonFinish', :method=> :patch %>
+                          </div>
+                        <% end %>                        
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div id="layout-container">
+  <div id="main">  
+    <%= render 'layouts/adminheadmenu' %>
+    <div class="margin-container">
+      <div class="scrollable wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-heading">
+              <h1>Empresas Juniores</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box-info">
+            <a href="/admin/junior_enterprises/new" class="btn btn-primary">Nova Empresa Junior</a>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Logo</th>
+                    <th>Site</th>
+                    <th>Telefone</th>
+                    <th>Youtube</th>
+                    <th>Facebook</th>
+                    <th>Área</th>
+                    <th>Estado</th>
+                    <th>Cidade</th>                     
+                    <th></th>                    
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @junior_enterprises.each do |je| %>
+                    <tr>
+                      <td><%= je.name %></td>
+                      <td><%= image_tag(je.logo_url, style: "width:120px; height:120px ") %></td>
+                      <td><%= je.site %></td>
+                      <td><%= je.phone %></td>
+                      <td><%= je.youtube %></td>
+                      <td><%= je.facebook %></td>
+                      <td><%= je.course %></td>
+                      <td><%= je.state %></td>
+                      <td><%= je.city %></td>
+                      <td style="text-align:center"><a href="/admin/junior_enterprises/edit/<%= je.id %>" class="btn btn-warning" type="button">Editar</a></td>
+                      <td style="text-align:center"><a href="/admin/junior_enterprises/delete/<%= je.id %>" class="btn btn-danger" type="button">Deletar</a></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>

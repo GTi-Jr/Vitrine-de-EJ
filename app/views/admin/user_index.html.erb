@@ -1,0 +1,51 @@
+<div id="layout-container">
+  <div id="main">  
+    <%= render 'layouts/adminheadmenu' %>
+    <div class="margin-container">
+    <!--scrollable wrapper start-->
+      <div class="scrollable wrapper">
+        <!--row start-->
+        <div class="row">
+        <!--col-md-12 start-->
+          <div class="col-md-12">
+            <div class="page-heading">
+              <h1>Usuários</h1>
+            </div>
+          </div><!--col-md-12 end-->
+        </div><!--row end-->
+        
+        <!--row start-->
+        <div class="row">
+        <!--col-md-12 start-->
+          <div class="col-md-12">
+            <div class="box-info">
+            <a href="/admin/users/new" class="btn btn-primary">Novo Usuário</a>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>E-mail</th>
+                    <th>Senha</th>
+                    <th>Tipo</th>                    
+                    <th></th>                    
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @users.each do |u| %>
+                    <tr>
+                      <td><%= u.email %></td>
+                      <td><%= u.password %></td>
+                      <td><%= u.function == "admin" ? "Administrador" : "Usuário" %></td>
+                      <td style="text-align:center"><a href="/admin/users/edit/<%= u.id %>" class="btn btn-warning" type="button">Editar</a></td>
+                      <td style="text-align:center"><a href="/admin/users/delete/<%= u.id %>" class="btn btn-danger" type="button">Deletar</a></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
