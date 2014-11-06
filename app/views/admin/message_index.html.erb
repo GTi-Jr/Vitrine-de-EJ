@@ -1,0 +1,47 @@
+<div id="layout-container">
+  <div id="main">  
+    <%= render 'layouts/adminheadmenu' %>
+    <div class="margin-container">
+      <div class="scrollable wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-heading">
+              <h1>Mensagens</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box-info">
+            <a href="/admin/messages/new" class="btn btn-primary">Nova Mensagem</a>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Texto</th>                   
+                    <th></th>                    
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @messages.each do |m| %>
+                    <tr>
+                      <td><%= m.name %></td>
+                      <td><%= m.phone %></td>
+                      <td><%= m.email %></td>
+                      <td><%= m.text %></td>
+                      <td style="text-align:center"><a href="/admin/messages/edit/<%= m.id %>" class="btn btn-warning" type="button">Editar</a></td>
+                      <td style="text-align:center"><a href="/admin/messages/delete/<%= m.id %>" class="btn btn-danger" type="button">Deletar</a></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>

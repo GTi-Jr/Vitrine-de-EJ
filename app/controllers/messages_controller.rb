@@ -9,12 +9,9 @@ class MessagesController < ApplicationController
     end 
   end
 
-  def show
-    @message = Message.find(params[:id])
-  end
-
   def new
     @message = Message.new
+    @junior_enterprises = JuniorEnterprise.all
     if is_admin?
       render template: "admin/message_new"
     end 
@@ -57,10 +54,9 @@ class MessagesController < ApplicationController
     end
   end
 
-  # DELETE /junior_enterprises/1
-  # DELETE /junior_enterprises/1.json
+
   def destroy
-    @junior_enterprise.destroy
+    @message.destroy
     respond_to do |format|
       if is_admin?        
         format.html { redirect_to "/admin/messages" }
@@ -77,7 +73,7 @@ class MessagesController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def message_params
       params.require(:message).permit(:name, :email, :text, :phone)
     end

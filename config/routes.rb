@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   patch '/member/:id' => "members#update", :as => 'update_member'
 
 
-  post '/message/:id' => "messages#create"
 
 
   #Junior Enterprises Routes
@@ -44,8 +43,10 @@ Rails.application.routes.draw do
   get '/admin/messages' => "messages#index", :as => "messages"
   get '/admin/messages/edit/:id' => "messages#edit"
   get '/admin/messages/new' => "messages#new"
+  post '/message/:id' => "messages#create"
+  post 'admin/messages/' => "messages#create"
   get '/admin/messages/delete/:id' => "messages#destroy"  
-  patch "/message/:id" => "messages#update"
+  patch "/admin/message/:id" => "messages#update"
 
   get '/admin/users' => "users#index", :as => 'admin_users'
   get '/admin/users/edit/:id' => "users#edit"
