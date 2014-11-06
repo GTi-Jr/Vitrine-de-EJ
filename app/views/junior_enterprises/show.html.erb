@@ -67,7 +67,27 @@
                   </div>
                   <div id="profile" class="tab-pane cont">
                     <h4>Conheça o nosso time!</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel orci et felis tempus rutrum.</p>
+                    <div>
+                      <div class="row">                          
+                        <% @junior_enterprise.members.each do |m|%>
+                          <div class="col-lg-6">
+                              <div class="panel">
+                                  <div class="panel-body">
+                                      <div class="bio-desk">                  
+                                          <p>
+                                            <a href="#">
+                                              <%= image_tag( m.photo_url, style: "width:64px; height:64px; border-radius:50%;") %>
+                                            </a>
+                                          </p>
+                                          <h4 class="red"><%= m.name %></h4>
+                                          <p><%= m.position%></p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div> 
+                        <% end %>                             
+                      </div>
+                    </div>
                   </div>
                   <div id="messages" class="tab-pane">
                     <div class="panel-body bio-graph-info">
