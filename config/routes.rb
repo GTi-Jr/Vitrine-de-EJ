@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   patch '/member/:id' => "members#update", :as => 'update_member'
 
 
+  post '/message/:id' => "messages#create"
+
+
   #Junior Enterprises Routes
 
   get "/junior_enterprises/new" => "junior_enterprises#new", :as => "new_junior_enterprise"
@@ -37,6 +40,12 @@ Rails.application.routes.draw do
   get '/admin/junior_enterprises/new' => "junior_enterprises#new"
   get '/admin/junior_enterprises/delete/:id' => "junior_enterprises#destroy"  
   patch "/junior_enterprise/:id" => "junior_enterprises#update"
+
+  get '/admin/messages' => "messages#index", :as => "messages"
+  get '/admin/messages/edit/:id' => "messages#edit"
+  get '/admin/messages/new' => "messages#new"
+  get '/admin/messages/delete/:id' => "messages#destroy"  
+  patch "/message/:id" => "messages#update"
 
   get '/admin/users' => "users#index", :as => 'admin_users'
   get '/admin/users/edit/:id' => "users#edit"

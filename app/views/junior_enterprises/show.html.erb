@@ -72,37 +72,62 @@
                   <div id="messages" class="tab-pane">
                     <div class="panel-body bio-graph-info">
                               <h1> Entre em contato </h1>
-                              <form role="form" class="form-horizontal">
-                                  <div class="form-group">
+                              <%= form_for(@message , url: "/message/#{@junior_enterprise.id}") do |f| %>
+                                <% flash.each do |name, msg| %>      
+                                  <% if msg.is_a?(String) %>
+                                    <% if flash[:error] -%>
+                                      <div class="alert alert-danger" >
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                      </div>
+                                    <% end %>
+
+                                    <% if flash[:alert] -%>
+                                      <div class="alert alert-warning" >
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                      </div>
+                                    <% end %>
+
+                                    <% if flash[:notice] -%>
+                                      <div class="alert alert-success" >
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                      </div>
+                                    <% end %>
+                                  <% end %>
+                                <% end %>
+
+                                <div class="form-group">
                                       <label class="col-lg-2 control-label"> Mensagem </label>
                                       <div class="col-lg-10">
-                                          <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                                          <textarea rows="10" cols="30" class="form-control" id="message[text]" name="message[text]"></textarea>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Nome</label>
                                       <div class="col-lg-6">
-                                          <input type="text" placeholder=" " id="f-name" class="form-control">
+                                          <%= f.text_field :name, class: "txtBox", placeholder: "Nome"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">E-mail</label>
                                       <div class="col-lg-6">
-                                          <input type="text" placeholder=" " id="l-name" class="form-control">
+                                          <%= f.text_field :email, class: "txtBox", placeholder: "E-mail"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Telefone</label>
                                       <div class="col-lg-6">
-                                          <input type="text" placeholder=" " id="l-name" class="form-control">
+                                          <%= f.text_field :phone, class: "txtBox", placeholder: "Telefone"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <div class="col-lg-offset-2 col-lg-10">
-                                          <button class="btn btn-danger" type="submit">Enviar</button>
+                                          <button class="btn btn-info" type="submit">Enviar</button>
                                       </div>
                                   </div>
-                              </form>
+                              <% end %>
                           </div>
                   </div>
                 </div>

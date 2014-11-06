@@ -12,7 +12,8 @@ class JuniorEnterprisesController < ApplicationController
 
   # GET /junior_enterprises/1
   # GET /junior_enterprises/1.json
-  def show
+  def show    
+    @message = Message.new
     @junior_enterprise = JuniorEnterprise.find(params[:id])
   end
 
