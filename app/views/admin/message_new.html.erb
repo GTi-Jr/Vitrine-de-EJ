@@ -1,0 +1,112 @@
+<div id="layout-container">
+  <div id="main">  
+    <%= render 'layouts/adminheadmenu' %>
+    <div class="margin-container">
+    <div class="scrollable wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-heading">
+            <h1><b>Nova Mensagem</b></h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="box-info">
+            <table align="center" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+              <tr>
+                <td>
+                  <div>
+                    <div id="wizard" class="swMain">
+                        <%= form_for(@message) do |f| %>
+                          <% flash.each do |name, msg| %>      
+                            <% if msg.is_a?(String) %>
+                              <% if flash[:error] -%>
+                                <div class="alert alert-danger" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                </div>
+                              <% end %>
+
+                              <% if flash[:alert] -%>
+                                <div class="alert alert-warning" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                </div>
+                              <% end %>
+
+                              <% if flash[:notice] -%>
+                                <div class="alert alert-success" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+
+                          <ul class="anchor">
+                            <li>
+                              <a class="selected">
+                                <span class="stepDesc">Dados<br></span>
+                              </a>
+                            </li>
+                          </ul>
+                          <div id="step-1" style="display: block; left: 0px;">
+                            <table cellspacing="3" cellpadding="3" align="center">
+                              <tbody>
+                                <tr>
+                                  <td align="center" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Nome</td>
+                                  <td align="left">
+                                    <%= f.text_field :name, class: "txtBox", placeholder: "Nome"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">E-mail</td>
+                                  <td align="left">
+                                    <%= f.text_field :email, class: "txtBox", placeholder: "E-mail"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Telefone</td>
+                                  <td align="left">
+                                    <%= f.text_field :phone, class: "txtBox", placeholder: "Telefone"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">Texto</td>
+                                  <td align="left">
+                                    <%= f.text_area :text, class: "txtBox", placeholder: "Telefone", rows: 10, cols: 30  %>
+                                  </td>
+                                </tr><tr>
+                                <td align="right">Destinatário</td>
+                                  <td align="left">                                
+                                    <%= select_tag "id", options_from_collection_for_select(@junior_enterprises, "id", "name"), class: 'form-control' %>
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                          <br>
+                          <div class="stepContainer" style="height: 179px;"></div>
+                          <div class="actionBar">
+                            <%= submit_tag "Criar",:class=> 'buttonFinish' %>
+                          </div>
+                        <% end %>                        
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>

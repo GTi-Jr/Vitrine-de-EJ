@@ -15,12 +15,14 @@ Rails.application.routes.draw do
   post "/members" => "members#create", :as => "create_member"
   get "/members" => "members#index", :as => "members"
   get "/member/:id" => "members#show", :as => "member"
+  get "/members/edit/:id" => "members#edit"
   patch '/member/:id' => "members#update", :as => 'update_member'
-
+  delete '/members/delete/:id' => "members#destroy"
 
   #Junior Enterprises Routes
 
   get "/junior_enterprises/new" => "junior_enterprises#new", :as => "new_junior_enterprise"
+  get "/messages" => "junior_enterprises#messages"
   post "/junior_enterprises" => "junior_enterprises#create", :as => "create_junior_enterprise"
   get "/junior_enterprises/edit" => "junior_enterprises#edit", :as => "edit_junior_enterprise"
   patch "/junior_enterprise" => "junior_enterprises#update", :as => "update_junior_enterprise"
@@ -37,6 +39,14 @@ Rails.application.routes.draw do
   get '/admin/junior_enterprises/new' => "junior_enterprises#new"
   get '/admin/junior_enterprises/delete/:id' => "junior_enterprises#destroy"  
   patch "/junior_enterprise/:id" => "junior_enterprises#update"
+
+  get '/admin/messages' => "messages#index"
+  get '/admin/messages/edit/:id' => "messages#edit"
+  get '/admin/messages/new' => "messages#new"
+  post '/message/:id' => "messages#create"
+  post 'admin/messages/' => "messages#create"
+  get '/admin/messages/delete/:id' => "messages#destroy"  
+  patch "/admin/message/:id" => "messages#update"
 
   get '/admin/users' => "users#index", :as => 'admin_users'
   get '/admin/users/edit/:id' => "users#edit"

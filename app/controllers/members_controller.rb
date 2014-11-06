@@ -3,9 +3,11 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
     if is_admin?
+      @members = Member.all
       render template: "admin/member_index"
+    else
+      @members = current_user.junior_enterprise.members
     end 
   end
 
@@ -22,7 +24,7 @@ class MembersController < ApplicationController
   def edit
     @member = Member.find(params[:id])
     @junior_enterprises = JuniorEnterprise.all
-    if is_admin?
+    if is_admin?      
       render template: "admin/member_edit"
     end 
   end
@@ -31,10 +33,15 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
+    if !is_admin?
+      @member.junior_enterprise_id = current_user.junior_enterprise.id
+    end 
     respond_to do |format|
       if @member.save
         if is_admin?
           format.html { redirect_to "/admin/members"}
+        else          
+          format.html { redirect_to "/members"}
         end 
       else
         format.html { render :new }
@@ -45,11 +52,16 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   # PATCH/PUT /members/1.json
   def update    
-    @member = Member.find(params[:id])    
+    @member = Member.find(params[:id])
+    if !is_admin?
+      @member.junior_enterprise_id = current_user.junior_enterprise.id
+    end     
     respond_to do |format|
       if @member.update(member_params)
         if is_admin?
           format.html { redirect_to "/admin/members"}
+        else          
+          format.html { redirect_to "/members"}
         end 
       else
         format.html { render :edit }
@@ -60,11 +72,12 @@ class MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
-    @member = Member.find(params[:id])
-    @member.destroy
+    Member.find(params[:id]).destroy
     respond_to do |format|
       if is_admin?
         format.html { redirect_to "/admin/members"}
+      else        
+        format.html { redirect_to "/members"}
       end 
     end
   end

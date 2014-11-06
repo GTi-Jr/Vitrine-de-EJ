@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030044949) do
+ActiveRecord::Schema.define(version: 20141106081009) do
 
   create_table "junior_enterprises", force: true do |t|
     t.string   "name"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20141030044949) do
   end
 
   add_index "members", ["junior_enterprise_id"], name: "index_members_on_junior_enterprise_id"
+
+  create_table "messages", force: true do |t|
+    t.text     "text"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "name"
+    t.integer  "junior_enterprise_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["junior_enterprise_id"], name: "index_messages_on_junior_enterprise_id"
 
   create_table "users", force: true do |t|
     t.string   "password"

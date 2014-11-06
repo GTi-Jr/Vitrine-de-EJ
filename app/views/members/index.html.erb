@@ -1,29 +1,46 @@
-<h1>Listing members</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Photo</th>
-      <th>Position</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @members.each do |member| %>
-      <tr>
-        <td><%= member.name %></td>
-        <td><%= member.photo %></td>
-        <td><%= member.position %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Member', new_member_path %>
+<div id="layout-container">
+  <%= render 'layouts/lateralmenu' %>
+  <div id="main">  
+    <%= render 'layouts/headmenu' %>
+      <div class="margin-container">
+      <div class="scrollable wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-heading">
+              <h1>Membros</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box-info">
+            <a href="/members/new" class="btn btn-primary">Adicionar ao Time</a>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Foto</th>
+                    <th>Cargo</th>                   
+                    <th></th>                    
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @members.each do |m| %>
+                    <tr>
+                      <td><%= m.name %></td>
+                      <td><%= image_tag(m.photo_url, style: "width:120px; height:120px ") %></td>
+                      <td><%= m.position %></td>
+                      <td style="text-align:center"><a href="/members/edit/<%= m.id %>" class="btn btn-warning" type="button">Editar</a></td>
+                      <td style="text-align:center"><a href="/members/delete/<%= m.id %>" class="btn btn-danger" type="button" data-method='delete'>Apagar</a></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
