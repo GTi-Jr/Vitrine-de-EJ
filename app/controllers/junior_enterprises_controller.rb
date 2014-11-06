@@ -109,6 +109,9 @@ class JuniorEnterprisesController < ApplicationController
     end
   end
 
+  def messages
+  end
+
   private
     def set_junior_enterprise
       if is_admin?
