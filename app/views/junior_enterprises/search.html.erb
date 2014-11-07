@@ -26,16 +26,18 @@
             </div>
             <div class="panel-body bio-graph-info">
               <div id="accordion3" class="panel-group accordion accordion-semi">
+                <% @i = 0 %>
                 <% @je.each do |je| %>
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h4 class="panel-title"> <a href="#ac3-2" data-parent="#accordion3" data-toggle="collapse" class="collapsed"> <i class="fa fa-angle-right"></i> <%= je.name %> </a> </h4>
+                      <h4 class="panel-title"> <a href="#ac<%= @i %>" data-parent="#accordion3" data-toggle="collapse" class="collapsed"> <i class="fa fa-angle-right"></i> <%= je.name %> </a> </h4>
                     </div>
-                    <div class="panel-collapse collapse" id="ac3-2">
+                    <div class="panel-collapse collapse" id="ac<%= @i %>">
                       <div class="panel-body"> <%= je.description %> </div>
                       <button onclick="window.location.href='junior_enterprise/<%= je.id %>'" class="btn btn-success" data-toggle="button"><i class="fa fa-search"></i> </button>
                     </div>
                   </div>
+                  <% @i = @i + 1 %>
                 <% end %>
               </div>
             </div>
