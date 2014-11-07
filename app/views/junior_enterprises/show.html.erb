@@ -43,7 +43,7 @@
                     </p>
                     <div class="row">
                       <div class="bio-row" style="width:100%">
-                        <p><span>Área de Atuação: </span> ... </p>
+                        <p><span>Área de Atuação: </span> <%= @junior_enterprise.course%> </p>
                       </div>
                       <div class="bio-row">
                         <p><span>Site: </span> <%= @junior_enterprise.site%> </p>
@@ -58,10 +58,10 @@
                         <p><span>Facebook: </span><%= @junior_enterprise.facebook%></p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Estado </span><%= @junior_enterprise.state%></p>
+                        <p><span>Estado: </span><%= @junior_enterprise.state%></p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Cidade </span><%= @junior_enterprise.city%></p>
+                        <p><span>Cidade: </span><%= @junior_enterprise.city%></p>
                       </div>
                     </div>
                   </div>
@@ -127,19 +127,19 @@
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Nome</label>
                                       <div class="col-lg-6">
-                                          <%= f.text_field :name, class: "txtBox", placeholder: "Nome"  %>
+                                          <%= f.text_field :name, class: "form-control", placeholder: "Nome"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">E-mail</label>
                                       <div class="col-lg-6">
-                                          <%= f.text_field :email, class: "txtBox", placeholder: "E-mail"  %>
+                                          <%= f.text_field :email, class: "form-control", placeholder: "E-mail"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Telefone</label>
                                       <div class="col-lg-6">
-                                          <%= f.text_field :phone, class: "txtBox", placeholder: "Telefone"  %>
+                                          <%= f.text_field :phone, class: "form-control", placeholder: "Telefone"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">

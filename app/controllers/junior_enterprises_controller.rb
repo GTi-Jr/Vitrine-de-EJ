@@ -123,6 +123,6 @@ class JuniorEnterprisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def junior_enterprise_params
-      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube)
+      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course)
     end
 end
