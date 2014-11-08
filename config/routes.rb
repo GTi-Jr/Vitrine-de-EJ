@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   get "log_out" => "session#destroy"
 
+  #Feedback Routes
+  get "/feedback" => "feedback#feedback"
+  post "/feedback" => "feedback#feedback_sent"
+
   #Members
 
   get "/members/new" => "members#new", :as => "new_member"
