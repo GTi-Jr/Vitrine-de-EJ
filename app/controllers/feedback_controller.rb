@@ -6,19 +6,17 @@ class FeedbackController < ApplicationController
   def feedback_sent
     @message = Message.new
 
-    if params[:text] != nil
-      @message.text = params[:text]
-    else
-      redirect_to "/"
-    end
+    respond_to do |format|      
 
-    if params[:email] != nil
-      @message.email = params[:email]
-    end
+      if params[:text] != nil && params[:text] != ""
+        @message.text = params[:text]
+        @message.email = params[:email]
 
-    respond_to do |format|
-      AdmNotifier.send_feedback(@message).deliver
-      format.html { redirect_to "/"}
+        AdmNotifier.send_feedback(@message).deliver
+        format.html { redirect_to "/"}
+      else        
+        format.html { redirect_to "/"}
+      end
     end
   end
 end
