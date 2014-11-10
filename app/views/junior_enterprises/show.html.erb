@@ -45,6 +45,9 @@
                       <div class="bio-row" style="width:100%">
                         <p><span>Área de Atuação: </span> <%= @junior_enterprise.course%> </p>
                       </div>
+                      <div class="bio-row" style="width:100%">
+                        <p><span>Email: </span> <%= User.find(@junior_enterprise.user_id).email %> </p>
+                      </div>
                       <div class="bio-row">
                         <p><span>Site: </span> <%= @junior_enterprise.site%> </p>
                       </div>

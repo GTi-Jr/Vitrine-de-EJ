@@ -105,7 +105,10 @@ class JuniorEnterprisesController < ApplicationController
       end
     end
 
-    if params[:tags]
+    if params[:tag]
+      unless params[:tag].blank?
+        @je = @je.where("course like ?", "%#{params[:tag]}%")
+      end
     end
   end
 
