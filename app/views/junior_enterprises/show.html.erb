@@ -31,7 +31,9 @@
               <div class="tab-container">
                 <ul class="nav nav-tabs">
                   <li class="active"><a data-toggle="tab" href="#home">Informações</a></li>
-                  <li><a data-toggle="tab" href="#profile">Membros</a></li>
+                  <% if @junior_enterprise.members.count > 0 %>
+                    <li><a data-toggle="tab" href="#profile">Membros</a></li>
+                  <% end %>
                   <li><a data-toggle="tab" href="#messages">Contato</a></li>
                 </ul>
                 <div class="tab-content">
@@ -42,56 +44,74 @@
                       </a>
                     </p>
                     <div class="row">
-                      <div class="bio-row" style="width:100%">
-                        <p><span>Área de Atuação: </span> <%= @junior_enterprise.course%> </p>
-                      </div>
-                      <div class="bio-row" style="width:100%">
-                        <p><span>Email: </span> <%= User.find(@junior_enterprise.user_id).email %> </p>
-                      </div>
-                      <div class="bio-row">
-                        <p><span>Site: </span> <%= @junior_enterprise.site%> </p>
-                      </div>
-                      <div class="bio-row">
-                        <p><span>Telefone: </span> <%= @junior_enterprise.phone%> </p>
-                      </div>
-                      <div class="bio-row">
-                        <p><span>Youtube: </span> <%= @junior_enterprise.youtube%></p>
-                      </div>
-                      <div class="bio-row">
-                        <p><span>Facebook: </span><%= @junior_enterprise.facebook%></p>
-                      </div>
-                      <div class="bio-row">
-                        <p><span>Estado: </span><%= @junior_enterprise.state%></p>
-                      </div>
-                      <div class="bio-row">
-                        <p><span>Cidade: </span><%= @junior_enterprise.city%></p>
-                      </div>
+                      <% if @junior_enterprise.course != nil && @junior_enterprise.course != "" %>
+                        <div class="bio-row" style="width:100%">
+                          <p><span>Área de Atuação: </span> <%= @junior_enterprise.course%> </p>
+                        </div>
+                      <% end %>
+                      <% if @user.email != nil && @user.email != "" %>
+                        <div class="bio-row" style="width:100%">
+                          <p><span>Email: </span> <%= @user.email %> </p>
+                        </div>
+                      <% end %>
+                      <% if @junior_enterprise.site != nil && @junior_enterprise.site != "" %>
+                        <div class="bio-row">
+                          <p><span>Site: </span> <%= @junior_enterprise.site %> </p>
+                        </div>
+                      <% end %>
+                      <% if @junior_enterprise.phone != nil && @junior_enterprise.phone != "" %>
+                        <div class="bio-row">
+                          <p><span>Telefone: </span> <%= @junior_enterprise.phone %> </p>
+                        </div>
+                      <% end %>
+                      <% if @junior_enterprise.youtube != nil && @junior_enterprise.youtube != ""  %>
+                        <div class="bio-row">
+                          <p><span>Youtube: </span> <%= @junior_enterprise.youtube %></p>
+                        </div>
+                      <% end %>
+                      <% if @junior_enterprise.facebook != nil && @junior_enterprise.facebook != ""  %>
+                        <div class="bio-row">
+                          <p><span>Facebook: </span><%= @junior_enterprise.facebook %></p>
+                        </div>
+                      <% end %>
+                      <% if @junior_enterprise.state != nil && @junior_enterprise.state != ""  %>
+                        <div class="bio-row">
+                          <p><span>Estado: </span><%= @junior_enterprise.state %></p>
+                        </div>
+                      <% end %>
+                      <% if @junior_enterprise.city != nil && @junior_enterprise.city != ""  %>
+                        <div class="bio-row">
+                          <p><span>Cidade: </span><%= @junior_enterprise.city %></p>
+                        </div>
+                      <% end %>
                     </div>
                   </div>
-                  <div id="profile" class="tab-pane cont">
-                    <h4>Conheça o nosso time!</h4>
-                    <div>
-                      <div class="row">                          
-                        <% @junior_enterprise.members.each do |m|%>
-                          <div class="col-lg-6">
-                              <div class="panel">
-                                  <div class="panel-body">
-                                      <div class="bio-desk">                  
-                                          <p>
-                                            <a href="#">
-                                              <%= image_tag( m.photo_url, style: "width:64px; height:64px; border-radius:50%;") %>
-                                            </a>
-                                          </p>
-                                          <h4 class="red"><%= m.name %></h4>
-                                          <p><%= m.position%></p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div> 
-                        <% end %>                             
+                  <% if @junior_enterprise.members.count > 0 %>
+                    <div id="profile" class="tab-pane cont">
+                      <h4>Conheça o nosso time!</h4>
+                      <div>
+                        <div class="row">                          
+                          <% @junior_enterprise.members.each do |m|%>
+                            <div class="col-lg-6">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="bio-desk">                  
+                                            <p>
+                                              <a href="#">
+                                                <%= image_tag( m.photo_url, style: "width:64px; height:64px; border-radius:50%;") %>
+                                              </a>
+                                            </p>
+                                            <h4 class="red"><%= m.name %></h4>
+                                            <p><%= m.position%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                          <% end %>                             
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  <% end %>
                   <div id="messages" class="tab-pane">
                     <div class="panel-body bio-graph-info">
                               <h1> Entre em contato </h1>

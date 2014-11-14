@@ -15,6 +15,7 @@ class JuniorEnterprisesController < ApplicationController
   def show    
     @message = Message.new
     @junior_enterprise = JuniorEnterprise.find(params[:id])
+    @user = User.find(@junior_enterprise.user_id)
   end
 
   # GET /junior_enterprises/new
