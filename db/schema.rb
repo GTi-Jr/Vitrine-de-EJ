@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106081009) do
+ActiveRecord::Schema.define(version: 20141114051510) do
 
   create_table "junior_enterprises", force: true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141106081009) do
     t.string   "youtube"
     t.string   "facebook"
     t.string   "course"
+    t.string   "area"
   end
 
   add_index "junior_enterprises", ["user_id"], name: "index_junior_enterprises_on_user_id"

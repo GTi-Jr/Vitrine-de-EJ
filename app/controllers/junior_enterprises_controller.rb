@@ -15,6 +15,7 @@ class JuniorEnterprisesController < ApplicationController
   def show    
     @message = Message.new
     @junior_enterprise = JuniorEnterprise.find(params[:id])
+    @user = User.find(@junior_enterprise.user_id)
   end
 
   # GET /junior_enterprises/new
@@ -95,7 +96,7 @@ class JuniorEnterprisesController < ApplicationController
 
     if params[:name]
       unless params[:name].blank?
-        @je = @je.where(["name = :name", { name: params[:name]}])
+        @je = @je.where("name like ?", "%#{params[:name]}%")
       end
     end
 
@@ -105,9 +106,9 @@ class JuniorEnterprisesController < ApplicationController
       end
     end
 
-    if params[:tag]
-      unless params[:tag].blank?
-        @je = @je.where("course like ?", "%#{params[:tag]}%")
+    if params[:area]
+      unless params[:area].blank?
+        @je = @je.where("area like ?", "%#{params[:area]}%")
       end
     end
   end
@@ -126,6 +127,6 @@ class JuniorEnterprisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def junior_enterprise_params
-      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course)
+      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area)
     end
 end

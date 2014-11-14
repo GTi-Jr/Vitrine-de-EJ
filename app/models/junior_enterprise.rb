@@ -1,6 +1,6 @@
 class JuniorEnterprise < ActiveRecord::Base
-    belongs_to :junior_enterprise
-	has_many :members
+    belongs_to :user, dependent: :destroy	 
+	has_many :members, dependent: :destroy
 	has_many :messages	
 	mount_uploader :logo, ImageUploader
 end

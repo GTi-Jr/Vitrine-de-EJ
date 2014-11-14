@@ -1,7 +1,7 @@
 <div class="container login-bg">
 	<div class="login-form-signin">
 	  <div class="login-logo"><%= image_tag("logo.png") %></div>
-	  <h2 class="login-form-signin-heading">Crie seu Usuário</h2>
+	  <h2 class="login-form-signin-heading">Crie sua Empresa Junior</h2>
 	  <div class="login-wrap">
 	    <%= form_for(@user) do |f| %>
 	      <% flash.each do |name, msg| %>      
@@ -30,7 +30,7 @@
 	      <% end %> 
 
 	      <div class="form-group has-feedback lg left-feedback no-label">
-	        <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
+	        <%= f.text_field :email, class: "form-control", placeholder: "Email da Empresa Junior"  %>
 	      </div>
 	      <button type="submit" method="post" class="btn btn-lg btn-primary btn-block">Criar</button>
 	    <% end %>
