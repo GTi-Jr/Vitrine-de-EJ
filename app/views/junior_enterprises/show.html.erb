@@ -51,12 +51,12 @@
                       <% end %>
                       <% if @user.email != nil && @user.email != "" %>
                         <div class="bio-row" style="width:100%">
-                          <p><span>Email: </span> <%= @user.email %> </p>
+                          <p><span>Email: </span> <%= mail_to @user.email %> </p>
                         </div>
                       <% end %>
                       <% if @junior_enterprise.site != nil && @junior_enterprise.site != "" %>
                         <div class="bio-row">
-                          <p><span>Site: </span> <%= @junior_enterprise.site %> </p>
+                          <p><span>Site: </span> <%= link_to @junior_enterprise.site %> </p>
                         </div>
                       <% end %>
                       <% if @junior_enterprise.phone != nil && @junior_enterprise.phone != "" %>
