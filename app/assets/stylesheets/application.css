@@ -11,6 +11,12 @@
  * file per style scope.
  *
  *= require font-awesome
- *= require_self 
- *= require_tree .
+ *= require animate
+ *= require atomstyle
+ *= require bootstrap
+ *= require nanoscroller
+ *= require smartwizard
+ *= require styleresponsive
+ *= require jqueryui
+ *= require_self
  */
