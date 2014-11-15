@@ -20,44 +20,70 @@
                             <div class="panel-body bio-graph-info">
                                 <h1><%= current_user.junior_enterprise.name %></h1>
                                 <div class="row">
-                                    <div class="bio-row">
-                                        <p><span>Site: </span> <%= current_user.junior_enterprise.site %></p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Telefone: </span><%= current_user.junior_enterprise.phone %></p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Youtube: </span><%= current_user.junior_enterprise.youtube %></p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Facebook: </span><%= current_user.junior_enterprise.facebook %></p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Cidade: </span><%= current_user.junior_enterprise.city %></p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Estado: </span><%= current_user.junior_enterprise.state %></p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Curso: </span><%= current_user.junior_enterprise.course %></p>
-                                    </div>
+                                    <% unless current_user.junior_enterprise.course.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Curso: </span> <%= current_user.junior_enterprise.course %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.area.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Area: </span> <%= current_user.junior_enterprise.area %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.site.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Site: </span> <%= current_user.junior_enterprise.site %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.phone.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Telefone: </span> <%= current_user.junior_enterprise.phone %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.youtube.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Youtube: </span> <%= current_user.junior_enterprise.youtube %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.facebook.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Facebook: </span> <%= current_user.junior_enterprise.facebook %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.city.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Cidade: </span> <%= current_user.junior_enterprise.city %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.state.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Estado: </span> <%= current_user.junior_enterprise.state %></p>
+                                      </div>
+                                    <% end %>
+                                    <% unless current_user.junior_enterprise.address.blank? %>
+                                      <div class="bio-row">
+                                          <p><span>Endereço: </span> <%= current_user.junior_enterprise.address %></p>
+                                      </div>
+                                    <% end %>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="panel">
-                                        <div class="panel-body">
-                                            <div class="bio-desk">
-                                                <h4 class="red">Descrição</h4>
-                                                <p><%= current_user.junior_enterprise.description%></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
+                        <% unless current_user.junior_enterprise.description.blank? %>
+                          <div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="bio-desk">
+                                                  <h4 class="red">Descrição</h4>
+                                                  <p><%= current_user.junior_enterprise.description %></p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>                                
+                              </div>
+                          </div>
+                        <% end %>
                     </div>
                 </div>   
         </div>
