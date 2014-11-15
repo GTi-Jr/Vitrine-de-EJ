@@ -23,9 +23,11 @@
                     <th>Telefone</th>
                     <th>Youtube</th>
                     <th>Facebook</th>
+                    <th>Curso</th>
                     <th>Área</th>
                     <th>Estado</th>
-                    <th>Cidade</th>                     
+                    <th>Cidade</th>   
+                    <th>Endereço</th>                   
                     <th></th>                    
                     <th></th>
                   </tr>
@@ -40,8 +42,10 @@
                       <td><%= je.youtube %></td>
                       <td><%= je.facebook %></td>
                       <td><%= je.course %></td>
+                      <td><%= je.area %></td>
                       <td><%= je.state %></td>
                       <td><%= je.city %></td>
+                      <td><%= je.address %></td>
                       <td style="text-align:center"><a href="/admin/junior_enterprises/edit/<%= je.id %>" class="btn btn-warning" type="button">Editar</a></td>
                       <td style="text-align:center"><a href="/admin/junior_enterprises/delete/<%= je.id %>" class="btn btn-danger" type="button">Deletar</a></td>
                     </tr>
