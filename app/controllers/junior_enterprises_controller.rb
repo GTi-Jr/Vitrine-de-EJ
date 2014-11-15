@@ -18,8 +18,8 @@ class JuniorEnterprisesController < ApplicationController
     @user = User.find(@junior_enterprise.user_id)
 
 
-    unless (@junior_enterprise.state.blank? || @junior_enterprise.city.blank?)
-      @mapAdress = 
+    if ( !@junior_enterprise.state.blank? && !@junior_enterprise.city.blank? && !@junior_enterprise.address.blank?)
+      @mapAddress = @junior_enterprise.address.tr(" ", "+")+","+@junior_enterprise.city.tr(" ", "+")+","+@junior_enterprise.state.tr(" ", "+")
     end
   end
 
