@@ -16,6 +16,11 @@ class JuniorEnterprisesController < ApplicationController
     @message = Message.new
     @junior_enterprise = JuniorEnterprise.find(params[:id])
     @user = User.find(@junior_enterprise.user_id)
+
+
+    if ( !@junior_enterprise.state.blank? && !@junior_enterprise.city.blank? && !@junior_enterprise.address.blank?)
+      @mapAddress = @junior_enterprise.address.tr(" ", "+")+","+@junior_enterprise.city.tr(" ", "+")+","+@junior_enterprise.state.tr(" ", "+")
+    end
   end
 
   # GET /junior_enterprises/new
@@ -127,6 +132,6 @@ class JuniorEnterprisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def junior_enterprise_params
-      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area)
+      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area, :address)
     end
 end

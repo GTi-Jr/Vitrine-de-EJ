@@ -44,47 +44,69 @@
                       </a>
                     </p>
                     <div class="row">
-                      <% if @junior_enterprise.course != nil && @junior_enterprise.course != "" %>
+                      <% unless @junior_enterprise.course.blank? %>
                         <div class="bio-row" style="width:100%">
-                          <p><span>Área de Atuação: </span> <%= @junior_enterprise.course%> </p>
+                          <p><span>Curso: </span> <%= @junior_enterprise.course %> </p>
                         </div>
                       <% end %>
-                      <% if @user.email != nil && @user.email != "" %>
+                      <% unless @user.email.blank? %>
                         <div class="bio-row" style="width:100%">
                           <p><span>Email: </span> <%= mail_to @user.email %> </p>
                         </div>
                       <% end %>
-                      <% if @junior_enterprise.site != nil && @junior_enterprise.site != "" %>
+                      <% unless @junior_enterprise.site.blank? %>
                         <div class="bio-row">
                           <p><span>Site: </span> <%= link_to @junior_enterprise.site %> </p>
                         </div>
                       <% end %>
-                      <% if @junior_enterprise.phone != nil && @junior_enterprise.phone != "" %>
+                      <% unless @junior_enterprise.phone.blank? %>
                         <div class="bio-row">
                           <p><span>Telefone: </span> <%= @junior_enterprise.phone %> </p>
                         </div>
                       <% end %>
-                      <% if @junior_enterprise.youtube != nil && @junior_enterprise.youtube != ""  %>
+                      <% unless @junior_enterprise.youtube.blank? %>
                         <div class="bio-row">
                           <p><span>Youtube: </span> <%= @junior_enterprise.youtube %></p>
                         </div>
                       <% end %>
-                      <% if @junior_enterprise.facebook != nil && @junior_enterprise.facebook != ""  %>
+                      <% unless @junior_enterprise.facebook.blank? %>
                         <div class="bio-row">
                           <p><span>Facebook: </span><%= @junior_enterprise.facebook %></p>
                         </div>
                       <% end %>
-                      <% if @junior_enterprise.state != nil && @junior_enterprise.state != ""  %>
+                      <% unless @junior_enterprise.state.blank? %>
                         <div class="bio-row">
                           <p><span>Estado: </span><%= @junior_enterprise.state %></p>
                         </div>
                       <% end %>
-                      <% if @junior_enterprise.city != nil && @junior_enterprise.city != ""  %>
+                      <% unless @junior_enterprise.city.blank? %>
                         <div class="bio-row">
                           <p><span>Cidade: </span><%= @junior_enterprise.city %></p>
                         </div>
                       <% end %>
+                      <% unless @junior_enterprise.address.blank?  %>
+                        <div class="bio-row">
+                          <p><span>Endereço: </span><%= @junior_enterprise.address %></p>
+                        </div>
+                      <% end %>
                     </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                          <div class="panel">
+                              <div class="panel-body">
+                                  <div class="bio-desk">
+                                      <h4>Mapa</h4>
+                                      <iframe
+                                        width="400"
+                                        height="300"
+                                        frameborder="10" style="border:10"
+                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBNrfvod702JNXjN2Csns73js-FRFPXfPI&q=<%= @mapAddress %>">
+                                      </iframe>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>                                
+                    </div>                           
                   </div>
                   <% if @junior_enterprise.members.count > 0 %>
                     <div id="profile" class="tab-pane cont">
