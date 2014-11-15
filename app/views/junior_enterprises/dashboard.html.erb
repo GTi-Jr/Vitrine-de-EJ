@@ -68,20 +68,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="panel">
-                                        <div class="panel-body">
-                                            <div class="bio-desk">
-                                                <h4 class="red">Descrição</h4>
-                                                <p><%= current_user.junior_enterprise.description%></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
+                        <% unless current_user.junior_enterprise.description.blank? %>
+                          <div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="bio-desk">
+                                                  <h4 class="red">Descrição</h4>
+                                                  <p><%= current_user.junior_enterprise.description %></p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>                                
+                              </div>
+                          </div>
+                        <% end %>
                     </div>
                 </div>   
         </div>
