@@ -1,29 +1,32 @@
 <%= stylesheet_link_tag "landingpage" %>
+<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <div class="intro-header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>Vitrine de EJ</h1>
-                        <h3>Ainda não decidi o que escrever aqui =P</h3>
+                        <h1 style="font-family: Pacifico; font-size: 8em;">Vitrine</h1>
+                        <h3>Encontre soluções de alta qualidade e formente o empreendedorismo no Brasil</h3>
                         <hr class="intro-divider">
+                        <h4>Você sabe o que é uma Empresa Junior?</h4>
+                        <button data-scroll-nav="0" class="btn btn-warning"><span class="network-name">Não</span></button> - 
+                        <button data-scroll-nav="1" class="btn btn-success"><span class="network-name">Sim</span></button>
                     </div>
                 </div>
             </div>
         </div>
       </div>
-    <div class="content-section-a">
+    <div class="content-section-a" data-scroll-index="0">
         <div class="container">
-
             <div class="row">
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-offset-1 col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Introdução - O que é uma EJ</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                    <div class="clearfix" ></div>
+                    <h2 class="section-heading">O que é uma Empresa Junior?</h2>
+                    <p class="lead" style="font-size: 16px;">Empresa Junior é uma organização social civil sem fins lucrativos , formada e gerida exclusivamente por alunos de graduação e pós-graduação de ensino superior , que presta serviços para empresas, instituições e da sociedade , sob a orientação de professores e profissionais com o objetivo de consolidar e reforçar a aprendizagem de seus membros. Júnior Empresas são semelhantes a empresas reais , contando com os princípios de governança corporativa como conselho gestor e diretoria além de sua própria regulação.</p>
                 </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="img/ipad.png" alt="FOTO1">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-6">
+                    <%= image_tag("je.png", style: "width: 300px") %>
                 </div>
             </div>
         </div>
@@ -31,29 +34,31 @@
     <div class="content-section-b">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" style="color:#fff">
+                <div class="col-lg-5 col-sm-push-6  col-sm-6" style="color:#fff">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Por quê você precisa de uma EJ</h2>
-                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                    <h2 class="section-heading">Por quê contratar uma Empresa Junior?</h2>
+                    <p class="lead" style="font-size: 16px;">Por sermos apaixonados pelo que fazemos e sem fins lucrativos.
+                        Nós oferecemos serviços profissionais e de alta qualidade a um preço justo.
+                        Somos parte de um movimento mundial de mais de {@} pessoas empenhadas a tornar empreendedorismo mais que uma palavra em nosso dicionário, mas sim uma ralidade.</p>
                 </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="img/dog.png" alt="FOTO2">
+                <div class="col-lg-offset-2 col-lg-5 col-sm-pull-6 col-sm-6">
+                    <%= image_tag("growth.png", style: "width: 300px") %>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content-section-a">
+    <div class="content-section-a"  data-scroll-index="1">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-5 col-sm-6 col-lg-offset-1 ">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">O que você encontrará na Vitrine</h2>
-                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                    <h2 class="section-heading">O que é a Vitrine?</h2>
+                    <p class="lead" style="font-size: 16px;">Desenvolvida pela GTi Engenharia Jr, a Vitrine cataloga as empresas juniores brasileiras em um só lugar, possibilitando o acesso à informações e contratação de serviços de forma intuitiva e integrada.</p>
                 </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="img/phones.png" alt="FOTO3">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-6">
+                    <%= image_tag("vitrine.png", style: "width: 300px") %>
                 </div>
             </div>
         </div>
@@ -67,7 +72,8 @@
                 <div class="col-lg-6">
                     <ul class="list-inline banner-social-buttons">
                         <li>
-                            <a href="/find" class="btn btn-default btn-lg"><span class="network-name">Encontrar uma Empresa Junior</span></a>
+                            <a href="/find" class="btn btn-default btn-lg"><span class="network-name">Encontrar uma Empresa Junior</span></a> OU 
+                            <a href="/users/new" class="btn btn-default btn-lg"><span class="network-name">Cadastrar uma Empresa Junior</span></a>
                         </li>
                     </ul>
                 </div>
@@ -93,3 +99,9 @@
         </div>
     </div>
 </footer>
+
+<script type="text/javascript">
+    $(function(){
+        $.scrollIt();
+    });
+</script>
