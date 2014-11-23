@@ -76,6 +76,15 @@
                                   </td>
                                 </tr>
                                 <tr>
+                                  <td align="right">Tipo de Serviço:</td>
+                                  <td align="left">
+                                      <%= f.check_box :project, style:"margin-left:5px"%> Projetos
+                                      <%= f.check_box :consultor, style:"margin-left:5px"%> Consultoria
+                                      <%= f.check_box :training, style:"margin-left:5px"%> Treinamento
+                                      <%= f.check_box :product, style:"margin-left:5px"%> Produtos
+                                  </td>
+                                </tr>                                
+                                <tr>
                                   <td align="right">Estado :</td>
                                   <td align="left">
                                     <%= select_tag "junior_enterprise[state]", "<option>Acre</option><option>Alagoas</option><option>Amapá</option><option>Amazonas</option><option>Bahia</option><option>Ceará</option><option>Distrito Federal</option><option>Espirito Santo</option><option>Goiás</option><option>Maranhão</option><option>Mato Grosso</option><option>Mato Grosso do Sul</option><option>Minas Gerais</option><option>Pará</option><option>Paraíba</option><option>Paraná</option><option>Pernambuco</option><option>Piauí</option><option>Rio de Janeiro</option><option>Rio Grande do Norte</option><option>Rio Grande do Sul</option><option>Rondônia</option><option>Roraima</option><option>Santa Catarina</option><option>São Paulo</option><option>Sergipe</option><option>Tocantins</option>".html_safe, class: 'form-control' %>
@@ -154,35 +163,11 @@
                           </div>
                           <br>
 
+                          <br>
                           <ul class="anchor">
                             <li>
                               <a class="selected">
                                 <span class="stepNumber">3</span>
-                                <span class="stepDesc">Porfólio<br></span>
-                              </a>
-                            </li>
-                          </ul>
-                          <div id="step-1" style="display: block; left: 0px;">
-                            <table cellspacing="3" cellpadding="3" align="center">
-                              <tbody>
-                                <tr>
-                                  <td align="center" colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                  <td align="right">Que tipos de serviços a sua Empresa Junior fornece?:</td> 
-                                  <td align="left">  
-                                    <%= f.checkbox("junior_enterprise", "training", {}, true, false) %>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                          <br>
-
-                          <ul class="anchor">
-                            <li>
-                              <a class="selected">
-                                <span class="stepNumber">4</span>
                                 <span class="stepDesc">Arquivos<br></span>
                               </a>
                             </li>

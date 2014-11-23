@@ -1,6 +1,5 @@
-<div id="layout-container">    
-  <%= render 'layouts/findmenu' %>
-  <div id="main" style="left: 200px !important;">  
+<div id="layout-container">
+  <div id="main" style="left: 0px !important;">  
     <div class="head-title">
       <div class="menu-switch">
         <i class="fa fa-bars"></i>
@@ -91,7 +90,7 @@
                       <% end %>
                     </div>
                     <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 col-lg-offset-6">
                           <div class="panel">
                               <div class="panel-body">
                                   <div class="bio-desk">
@@ -99,7 +98,7 @@
                                       <iframe
                                         width="400"
                                         height="300"
-                                        frameborder="10" style="border:10"
+                                        frameborder="0" style="border:0"
                                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBNrfvod702JNXjN2Csns73js-FRFPXfPI&q=<%= @mapAddress %>">
                                       </iframe>
                                   </div>
@@ -165,25 +164,25 @@
                                 <div class="form-group">
                                       <label class="col-lg-2 control-label"> Mensagem </label>
                                       <div class="col-lg-10">
-                                          <textarea rows="10" cols="30" class="form-control" id="message[text]" name="message[text]"></textarea>
+                                          <textarea rows="10" cols="30" class="form-control" id="message[text]" name="message[text]" style="margin-bottom: 10px;"></textarea>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Nome</label>
-                                      <div class="col-lg-6">
-                                          <%= f.text_field :name, class: "form-control", placeholder: "Nome"  %>
+                                      <div class="col-lg-10">
+                                          <%= f.text_field :name, class: "form-control", placeholder: "Nome", style:"margin-bottom: 10px;" %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">E-mail</label>
-                                      <div class="col-lg-6">
-                                          <%= f.text_field :email, class: "form-control", placeholder: "E-mail"  %>
+                                      <div class="col-lg-10">
+                                          <%= f.text_field :email, class: "form-control", placeholder: "E-mail", style:"margin-bottom: 10px;"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Telefone</label>
-                                      <div class="col-lg-6">
-                                          <%= f.text_field :phone, class: "form-control", placeholder: "Telefone"  %>
+                                      <div class="col-lg-10">
+                                          <%= f.text_field :phone, class: "form-control", placeholder: "Telefone", style:"margin-bottom: 10px;"  %>
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -193,9 +192,11 @@
                                   </div>
                               <% end %>
                           </div>
+
                   </div>
                 </div>
-              </div>
+              </div>              
+            <a href="/find" class="btn btn-info btn-block" style="width: 10%; margin-left: 1%;">Retornar</a>
             </div>
           </div>
         </div>   

@@ -66,18 +66,28 @@
                                 </div>
                               </p>
                               <p>
-                                <h5><strong>É para Desenvolvimento de produto ?</strong><h5>
-                                <div class="form-group has-feedback lg left-feedback no-label">
-                                  <%= check_box_tag 'receive_email', 'yes', true, class: 'form-control', include_blank: true , style: "width: 6%"%>
-                                </div>
+                                <h5><strong>Quais dos seguintes serviços você busca?</strong><h5>
                               </p>
                               <p>
-                                <h5><strong>É para Consultoria ?</strong><h5>
                                 <div class="form-group has-feedback lg left-feedback no-label">
-                                  <%= check_box_tag 'receive_email', 'yes', true, class: 'form-control', include_blank: true , style: "width: 6%;"%>
-                                </div>
-                              </p>
 
+                                  <div class="row">
+                                    <div class="col-md-1">
+                                      <%= check_box_tag 'consultor', true, false, class: 'form-control'%>Consultoria
+                                    </div>
+                                    <div class="col-md-1">
+                                      <%= check_box_tag 'project', true, false, class: 'form-control'%>Desenvolvimento de Projetos
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-1">
+                                      <%= check_box_tag 'training', true, false, class: 'form-control'%> Treinamento
+                                    </div>
+                                    <div class="col-md-1">
+                                      <%= check_box_tag 'product', true, false, class: 'form-control'%> Desenvolvimento de Produtos
+                                    </div>
+                                  </div>
+                              </p>
                               <button type="submit" class="btn btn-success btn-block" style="width: 10%">Buscar</button>
                             <%end%>
                           </div>

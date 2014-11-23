@@ -27,7 +27,12 @@
                     <th>Área</th>
                     <th>Estado</th>
                     <th>Cidade</th>   
-                    <th>Endereço</th>                   
+                    <th>Endereço</th>  
+                    <th>Projeto</th>
+                    <th>Treinamento</th>
+                    <th>Produtos</th>   
+                    <th>Consultoria</th>     
+                    <th>Acessos</th>                  
                     <th></th>                    
                     <th></th>
                   </tr>
@@ -46,6 +51,11 @@
                       <td><%= je.state %></td>
                       <td><%= je.city %></td>
                       <td><%= je.address %></td>
+                      <td><%= je.project  ? "Não" : "Sim"%></td>
+                      <td><%= je.training  ? "Não" : "Sim"%></td>
+                      <td><%= je.product ? "Não" : "Sim"%></td>
+                      <td><%= je.consultor ? "Não" : "Sim"%></td>
+                      <td><%= je.access%></td>
                       <td style="text-align:center"><a href="/admin/junior_enterprises/edit/<%= je.id %>" class="btn btn-warning" type="button">Editar</a></td>
                       <td style="text-align:center"><a href="/admin/junior_enterprises/delete/<%= je.id %>" class="btn btn-danger" type="button">Deletar</a></td>
                     </tr>

@@ -15,6 +15,8 @@ class JuniorEnterprisesController < ApplicationController
   def show    
     @message = Message.new
     @junior_enterprise = JuniorEnterprise.find(params[:id])
+    @junior_enterprise.access=+1
+    @junior_enterprise.save
     @user = User.find(@junior_enterprise.user_id)
 
 
@@ -42,6 +44,7 @@ class JuniorEnterprisesController < ApplicationController
   # POST /junior_enterprises.json
   def create
     @junior_enterprise = JuniorEnterprise.new(junior_enterprise_params)
+    @junior_enterprise.access = 0
 
     respond_to do |format|
       if @junior_enterprise.save
@@ -107,13 +110,37 @@ class JuniorEnterprisesController < ApplicationController
 
     if params[:state]
       unless params[:state].blank?
-        @je = @je.where(["state = :state", { state: params[:state]}])
+        @je = @je.where(["state = :state",{ state: params[:state]}])
       end
     end
 
     if params[:area]
       unless params[:area].blank?
         @je = @je.where("area like ?", "%#{params[:area]}%")
+      end
+    end
+
+    if params[:consultor]
+      if params[:consultor] == 'true'
+        @je = @je.where(["consultor = :consultor",{ consultor: true}])
+      end
+    end
+
+    if params[:training]
+      if params[:training] == 'true'
+        @je = @je.where(["training = :training",{ training: true}])
+      end
+    end
+
+    if params[:product]
+      if params[:product] == 'true'
+        @je = @je.where(["product = :product",{ product: true}])
+      end
+    end
+
+    if params[:project]
+      if params[:project] == 'true'
+        @je = @je.where(["project = :project",{ project: true}])
       end
     end
   end
@@ -132,6 +159,6 @@ class JuniorEnterprisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def junior_enterprise_params
-      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area, :address)
+      params.require(:junior_enterprise).permit(:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area, :address, :training, :consultor, :product, :project)
     end
 end

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :junior_enterprise, dependent: :destroy	 
+  has_one :junior_enterprise 
   
   validates :email, :presence => true
 
