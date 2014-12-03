@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @messages = Message.all
+    @messages = Message.all.page(params[:page]).per(10)
     if is_admin?
       render template: "admin/message_index"
     end 

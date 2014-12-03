@@ -21,6 +21,14 @@
                   <div>
                     <div id="wizard" class="swMain">
                         <%= form_for(@member) do |f| %>
+                          <% if @member.errors.any? %>    
+                              <% @member.errors.full_messages.each do |msg| %>
+                                <div class= "alert alert-danger">
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= msg %>
+                                </div>
+                              <% end %>    
+                          <% end %>
                           <% flash.each do |name, msg| %>      
                             <% if msg.is_a?(String) %>
                               <% if flash[:error] -%>

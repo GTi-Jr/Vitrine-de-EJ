@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_one :junior_enterprise 
   
   validates :email, :presence => true
+  validates :email, :uniqueness => true
 
   before_create { generate_token(:password) }
 

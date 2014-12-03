@@ -9,8 +9,8 @@ gtiengenhariajr@gmail.com - Venha falar conosco =D
 
 ## Setup
 
-1. _Clone este repositório git clone ``` https://github.com/GTi-Jr/ESE.git ```_
-2. _Rode no seu Terminal ``` rake db:migrate ```_
+1. _Clone este repositório git clone ``` https://github.com/GTi-Jr/Vitrine-de-EJ.git ```_
+2. _Rode no seu Terminal ``` rake db:migrate ``` e ``` rake db:seed ```_
 3. _Então ``` rails server ```_
 4. _Agora você tem em seu computador um servidor rodando a Vitrine de EJ_
 5. _Acesse no seu Browser [localhost:3000](localhost:3000)_

@@ -20,32 +20,15 @@
                 <td>
                   <div>
                     <div id="wizard" class="swMain">
-                        <%= form_for(@member) do |f| %>
-                          <% flash.each do |name, msg| %>      
-                            <% if msg.is_a?(String) %>
-                              <% if flash[:error] -%>
-                                <div class="alert alert-danger" >
+                          <%= form_for(@member) do |f| %>
+                            <% if @member.errors.any? %>    
+                              <% @member.errors.full_messages.each do |msg| %>
+                                <div class= "alert alert-danger">
                                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                                  <%= msg %>
                                 </div>
-                              <% end %>
-
-                              <% if flash[:alert] -%>
-                                <div class="alert alert-warning" >
-                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-                                </div>
-                              <% end %>
-
-                              <% if flash[:notice] -%>
-                                <div class="alert alert-success" >
-                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-                                </div>
-                              <% end %>
-                            <% end %>
+                              <% end %>    
                           <% end %>
-
                           <ul class="anchor">
                             <li>
                               <a class="selected">

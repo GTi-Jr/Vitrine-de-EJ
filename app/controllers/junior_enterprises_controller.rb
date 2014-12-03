@@ -1,10 +1,10 @@
-class JuniorEnterprisesController < ApplicationController  
+class JuniorEnterprisesController < ApplicationController
   before_action :set_junior_enterprise, only: [:edit, :update, :destroy]
 
   # GET /junior_enterprises
   # GET /junior_enterprises.json
   def index
-    @junior_enterprises = JuniorEnterprise.all
+    @junior_enterprises = JuniorEnterprise.all.page(params[:page]).per(10)
     if is_admin?
       render template: "admin/junior_enterprise_index"
     end 
@@ -44,8 +44,6 @@ class JuniorEnterprisesController < ApplicationController
   # POST /junior_enterprises.json
   def create
     @junior_enterprise = JuniorEnterprise.new(junior_enterprise_params)
-    @junior_enterprise.access = 0
-
     respond_to do |format|
       if @junior_enterprise.save
         current_user.junior_enterprise = @junior_enterprise
@@ -100,7 +98,7 @@ class JuniorEnterprisesController < ApplicationController
   end
 
   def search
-    @je = JuniorEnterprise.all
+    @je = JuniorEnterprise.all.page(params[:page]).per(10)
 
     if params[:name]
       unless params[:name].blank?
