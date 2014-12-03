@@ -18,7 +18,7 @@
               <div class="profile-info col-lg-9 col-lg-offset-1">                  
                   <div class="panel">
                       <div class="bio-graph-heading">
-                        Encontre a Empresa Junior que irá solucionar os seus problemas.
+                        <h1>Encontre a Empresa Junior que irá solucionar os seus problemas<h1>
                       </div>
                       <div class="panel-body bio-graph-info">
                           <div class="row">
@@ -71,24 +71,20 @@
                               <p>
                                 <div class="form-group has-feedback lg left-feedback no-label">
 
-                                  <div class="row">
-                                    <div class="col-md-1" style="margin: 10px;">
-                                      <%= check_box_tag 'consultor', true, false, class: 'form-control'%>Consultoria
-                                    </div>
-                                    <div class="col-md-1" style="margin: 10px;">
-                                      <%= check_box_tag 'project', true, false, class: 'form-control'%>Projetos
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-md-1" style="margin: 10px;">
-                                      <%= check_box_tag 'training', true, false, class: 'form-control'%>Treinamento
-                                    </div>
-                                    <div class="col-md-1" style="margin: 10px;">
-                                      <%= check_box_tag 'product', true, false, class: 'form-control'%>Produtos
-                                    </div>
-                                  </div>
+                                  <label class="checkbox-inline">                                    
+                                    <%= check_box_tag 'consultor', true, false%>Consultoria
+                                  </label><br>
+                                  <label class="checkbox-inline">                                    
+                                    <%= check_box_tag 'project', true, false%>Projetos
+                                  </label><br>
+                                  <label class="checkbox-inline">                                    
+                                    <%= check_box_tag 'training', true, false%>Treinamento
+                                  </label><br>
+                                  <label class="checkbox-inline">                                    
+                                    <%= check_box_tag 'product', true, false, style:"margin-left=-10px !important;"%>Produtos
+                                  </label><br>
                               </p>
-                              <button type="submit" class="btn btn-success btn-block" style="width: 10%">Buscar</button>
+                              <button type="submit" class="btn btn-success" style="margin-top: 15px;">Buscar</button>
                             <%end%>
                           </div>
                       </div>

@@ -1,4 +1,4 @@
-class JuniorEnterprisesController < ApplicationController  
+class JuniorEnterprisesController < ApplicationController
   before_action :set_junior_enterprise, only: [:edit, :update, :destroy]
 
   # GET /junior_enterprises
