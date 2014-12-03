@@ -4,7 +4,7 @@ class JuniorEnterprisesController < ApplicationController
   # GET /junior_enterprises
   # GET /junior_enterprises.json
   def index
-    @junior_enterprises = JuniorEnterprise.all
+    @junior_enterprises = JuniorEnterprise.all.page(params[:page]).per(10)
     if is_admin?
       render template: "admin/junior_enterprise_index"
     end 
@@ -98,7 +98,7 @@ class JuniorEnterprisesController < ApplicationController
   end
 
   def search
-    @je = JuniorEnterprise.all
+    @je = JuniorEnterprise.all.page(params[:page]).per(10)
 
     if params[:name]
       unless params[:name].blank?

@@ -4,10 +4,10 @@ class MembersController < ApplicationController
   # GET /members.json
   def index
     if is_admin?
-      @members = Member.all
+      @members = Member.all.page(params[:page]).per(10)
       render template: "admin/member_index"
     else
-      @members = current_user.junior_enterprise.members
+      @members = current_user.junior_enterprise.members.page(params[:page]).per(10)
     end 
   end
 
