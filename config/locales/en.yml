@@ -19,5 +19,62 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+en:  
+  activerecord:
+    models:
+      user: "Usuário"
+      member: "Membro"
+    attributes:
+      user:
+        password: "Senha"
+        email: "E-mail"
+      junior_enterprise:
+        name: "Nome"
+        logo: "Logo"
+        description: "Descrição"
+        phrase: "Slogan"
+        city: "Cidade"
+        phone: "Telefone"
+        state: "Estado"
+        course: "Curso"
+      member:
+        name: "Nome"
+        email: "E-mail"
+      message:
+        text: "Messagem"
+        email: "E-mail"
+    errors:
+      models:
+        member:
+          attributes:
+            name:
+              blank: "deve ser preenchido"
+              taken: "já está em uso"
+            email:
+              blank: "deve ser preenchido"
+              taken: "já está em uso"
+        user:
+          attributes:
+            email:
+              blank: "deve ser preenchido"
+              taken: "já está em uso"
+        junior_enterprise:
+          attributes:
+            name:
+              blank: "deve ser preenchido"
+              taken: "já está em uso"
+            description:
+              blank: "deve ser preenchido"
+            city:
+              blank: "deve ser preenchido"
+            state:
+              blank: "deve ser preenchido"
+            course:
+              blank: "deve ser preenchido"
+        message:
+          attributes:
+            text:
+              blank: "deve ser preenchido"
+            email:
+              blank: "deve ser preenchido"
+
