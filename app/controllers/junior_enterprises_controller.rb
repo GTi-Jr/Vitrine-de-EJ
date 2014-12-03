@@ -44,8 +44,6 @@ class JuniorEnterprisesController < ApplicationController
   # POST /junior_enterprises.json
   def create
     @junior_enterprise = JuniorEnterprise.new(junior_enterprise_params)
-    @junior_enterprise.access = 0
-
     respond_to do |format|
       if @junior_enterprise.save
         current_user.junior_enterprise = @junior_enterprise
