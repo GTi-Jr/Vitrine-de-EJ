@@ -18,6 +18,7 @@
  *= require nanoscroller
  *= require smartwizard
  *= require styleresponsive
+ *= require navbar
  *= require jqueryui
  *= require_self
  *= require bootstrap/bootstrap-tooltip

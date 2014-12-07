@@ -1,7 +1,10 @@
 class SessionController < ApplicationController
 
   def index
-  end		
+  end	
+
+  def explanation
+  end	
 
   def new
   end

@@ -1,5 +1,32 @@
 <%= stylesheet_link_tag "landingpage" %>
 <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <nav class="navbar navbar-default navbar-xs" role="navigation" style="margin-bottom: 2px;">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="font-family: Pacifico;" ><b>Vitrine</b></a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/"><i class="glyphicon"></i></a></li>
+        <li><a href="/log_in"><i class="fa fa-sign-in"></i> Login</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Ver Explicação sobre Empresas Juniores</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Fazer Log-In</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Dar Feedback</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
     <div class="intro-header">
         <div class="container">
             <div class="row">
@@ -8,99 +35,18 @@
                         <h1 style="font-family: Pacifico; font-size: 8em;">Vitrine</h1>
                         <h3>Encontre soluções de alta qualidade e incentive o empreendedorismo no Brasil</h3>
                         <hr class="intro-divider">
-                        <h4>Você sabe o que é uma Empresa Junior?</h4>
-                        <button data-scroll-nav="0" class="btn btn-warning"><span class="network-name">Não</span></button> - 
-                        <button data-scroll-nav="1" class="btn btn-success"><span class="network-name">Sim</span></button>
+                            <div style="margin-top: 30px; margin-bottom: 30px;">                          
+                                <a href="/find" class="btn btn-default"><span class="network-name">Encontrar uma Empresa Junior</span></a> OU <a href="/users/new" class="btn btn-default"><span class="network-name">Cadastrar uma Empresa Junior</span></a>
+                            </div>
+                            <div style="margin-top: 30px; margin-bottom: 30px;">
+                                <hr class="intro-divider">
+                                <h4>Você não sabe o que é uma Empresa Junior?</h4>
+                                <a href="/explanation" class="btn btn-success"><span class="network-name">Saiba Mais</span></a>
+                                </hr>
+                            </div>
+                        </hr>                                                
                     </div>
                 </div>
             </div>
         </div>
-      </div>
-    <div class="content-section-a" data-scroll-index="0">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-offset-1 col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix" ></div>
-                    <h2 class="section-heading">O que é uma Empresa Junior?</h2>
-                    <p class="lead" style="font-size: 16px;">Empresa Junior é uma organização social civil sem fins lucrativos , formada e gerida exclusivamente por alunos de graduação e pós-graduação de ensino superior , que presta serviços para empresas, instituições e da sociedade , sob a orientação de professores e profissionais com o objetivo de consolidar e reforçar a aprendizagem de seus membros. Júnior Empresas são semelhantes a empresas reais , contando com os princípios de governança corporativa como conselho gestor e diretoria além de sua própria regulação.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-1 col-sm-6">
-                    <%= image_tag("je.png", style: "width: 300px") %>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="content-section-b">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-push-6  col-sm-6" style="color:#fff">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Por quê contratar uma Empresa Junior?</h2>
-                    <p class="lead" style="font-size: 16px;">Por sermos apaixonados pelo que fazemos e sem fins lucrativos.
-                        Nós oferecemos serviços profissionais e de alta qualidade a um preço justo.
-                        Somos parte de um movimento com pessoas empenhadas a tornar empreendedorismo mais que uma palavra em nosso dicionário, mas sim uma ralidade.</p>
-                </div>
-                <div class="col-lg-offset-2 col-lg-5 col-sm-pull-6 col-sm-6">
-                    <%= image_tag("growth.png", style: "width: 300px") %>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content-section-a"  data-scroll-index="1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6 col-lg-offset-1 ">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">O que é a Vitrine?</h2>
-                    <p class="lead" style="font-size: 16px">Desenvolvida pela GTi Engenharia Jr, a Vitrine cataloga as empresas juniores brasileiras em um só lugar, possibilitando o acesso à informações e contratação de serviços de forma intuitiva e integrada.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-1 col-sm-6">
-                    <%= image_tag("vitrine.png", style: "width: 300px") %>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2>Conecte-se</h2>
-                </div>
-                <div class="col-lg-12">
-                    <ul class="list-inline banner-social-buttons">
-                        <li>
-                            <a href="/find" class="btn btn-default btn-lg"><span class="network-name">Encontrar uma Empresa Junior</span></a> OU <a href="/users/new" class="btn btn-default btn-lg"><span class="network-name">Cadastrar uma Empresa Junior</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="list-inline">
-                  <li>
-                      <a href="/log_in">Log-In</a>
-                  </li>
-                  <li class="footer-menu-divider">⋅</li>
-                  <li>
-                      <a href="/feedback">Feedback</a>
-                  </li>
-                    
-                </ul>
-                <p class="copyright text-muted small">Nerds Cearenses desenvolvendo o MEJ - <a href="http://gti.ufc.br">GTi Engenharia Jr</a></p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script type="text/javascript">
-    $(function(){
-        $.scrollIt();
-    });
-</script>

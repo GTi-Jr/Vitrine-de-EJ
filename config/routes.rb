@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   #Base/Session Routes
   get "log_in" => "session#new", :as => "log_in"
 
+  get "/explanation" => "session#explanation"
+
   post "log_in" => "session#create"
 
   get "log_out" => "session#destroy"
