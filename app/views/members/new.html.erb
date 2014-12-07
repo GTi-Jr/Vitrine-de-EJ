@@ -56,7 +56,7 @@
                                 </tr>
                                 <tr>
                                   <td align="right">Foto</td>
-                                  <td align="left">
+                                  <td align="left" id="photo" rel="tooltip" title="Use de imagens com fundo branco e resolução de até no máximo 120x120.">  
                                     <%= f.file_field :photo, class: "txtBox" %>
                                   </td>
                                 </tr>
@@ -80,3 +80,8 @@
       </div>
     </div>
 </div>
+<script>
+$(function(){
+  $("#photo[rel='tooltip']").tooltip();
+})
+</script>

@@ -188,7 +188,7 @@
                                 </tr>
                                 <tr>
                                   <td align="right">Logo :</td> 
-                                  <td align="left">  
+                                  <td align="left" id="logo" rel="tooltip" title="Use de imagens com fundo branco e resolução de até no máximo 120x120.">  
                                     <%= f.file_field :logo, class: "txtBox" %>
                                   </td>
                                 </tr>
@@ -217,5 +217,6 @@
 <script>
 $(function(){
   $("#junior_enterprise_address[rel='tooltip']").tooltip();
+  $("#logo[rel='tooltip']").tooltip();
 })
 </script>
