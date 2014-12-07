@@ -108,7 +108,7 @@
                                 <tr>
                                   <td align="right">Endereço :</td>
                                   <td align="left">
-                                    <%= f.text_field :address, class: "txtBox", placeholder: "Endereço, Rua e Numero"  %>
+                                    <input class="txtBox" id="junior_enterprise_address" name="junior_enterprise[address]" placeholder="Endereço, Rua e Numero" type="text" rel="tooltip" title="Cuidado ao preencher o seu endereço, cheque no Google Maps se há algum resultado.">
                                   </td>
                                 </tr>
                               </tbody>
@@ -188,7 +188,7 @@
                                 </tr>
                                 <tr>
                                   <td align="right">Logo :</td> 
-                                  <td align="left">  
+                                  <td align="left" id="logo" rel="tooltip" title="Use de imagens com fundo branco e resolução de até no máximo 120x120.">  
                                     <%= f.file_field :logo, class: "txtBox" %>
                                   </td>
                                 </tr>
@@ -214,3 +214,9 @@
     </div>
   </div>
 </div>
+<script>
+$(function(){
+  $("#junior_enterprise_address[rel='tooltip']").tooltip();
+  $("#logo[rel='tooltip']").tooltip();
+})
+</script>

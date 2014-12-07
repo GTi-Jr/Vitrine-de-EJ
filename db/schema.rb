@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203082631) do
+ActiveRecord::Schema.define(version: 20141207062347) do
 
   create_table "junior_enterprises", force: true do |t|
     t.string   "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20141203082631) do
     t.integer  "junior_enterprise_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "read"
   end
 
   add_index "messages", ["junior_enterprise_id"], name: "index_messages_on_junior_enterprise_id"

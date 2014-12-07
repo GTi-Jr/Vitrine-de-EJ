@@ -20,4 +20,5 @@
  *= require styleresponsive
  *= require jqueryui
  *= require_self
+ *= require bootstrap/bootstrap-tooltip
  */

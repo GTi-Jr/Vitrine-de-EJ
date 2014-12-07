@@ -7,6 +7,7 @@ class MembersController < ApplicationController
       @members = Member.all.page(params[:page]).per(10)
       render template: "admin/member_index"
     else
+      number_of_messages
       @members = current_user.junior_enterprise.members.page(params[:page]).per(10)
     end 
   end
@@ -85,6 +86,6 @@ class MembersController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :photo, :position, :junior_enterprise_id)
+      params.require(:member).permit(:name, :photo, :position, :junior_enterprise_id, :email)
     end
 end

@@ -1,5 +1,6 @@
 class JuniorEnterprisesController < ApplicationController
   before_action :set_junior_enterprise, only: [:edit, :update, :destroy]
+  before_action :number_of_messages, only: [:members, :edit, :dashboard]
 
   # GET /junior_enterprises
   # GET /junior_enterprises.json
@@ -19,9 +20,13 @@ class JuniorEnterprisesController < ApplicationController
     @junior_enterprise.save
     @user = User.find(@junior_enterprise.user_id)
 
+    streeAddress = @junior_enterprise.address.tr(",-/", " ")
+    streeAddress = streeAddress.split.join(" ")
+    streeAddress = streeAddress.tr(" ", "+")
+
 
     if ( !@junior_enterprise.state.blank? && !@junior_enterprise.city.blank? && !@junior_enterprise.address.blank?)
-      @mapAddress = @junior_enterprise.address.tr(" ", "+")+","+@junior_enterprise.city.tr(" ", "+")+","+@junior_enterprise.state.tr(" ", "+")
+      @mapAddress = streeAddress + "," + @junior_enterprise.city.tr(" ", "+") + "," + @junior_enterprise.state.tr(" ", "+")
     end
   end
 
@@ -144,6 +149,13 @@ class JuniorEnterprisesController < ApplicationController
   end
 
   def messages
+    @number_of_messages = 0
+    @messages = current_user.junior_enterprise.messages.page(params[:page]).per(10)
+
+    @messages.where('read = ?', false).each do |me|
+      me.read = true
+      me.save
+    end
   end
 
   private

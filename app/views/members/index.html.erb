@@ -20,7 +20,9 @@
                   <tr>
                     <th>Nome</th>
                     <th>Foto</th>
-                    <th>Cargo</th>                   
+                    <th>Cargo</th>  
+                    <th>E-mail</th>
+                    <th>Telefone</th>                 
                     <th></th>                    
                     <th></th>
                   </tr>
@@ -31,6 +33,8 @@
                       <td><%= m.name %></td>
                       <td><%= image_tag(m.photo_url, style: "width:120px; height:120px ") %></td>
                       <td><%= m.position %></td>
+                      <td><%= m.email %></td>
+                      <td><%= m.phone %></td>
                       <td style="text-align:center"><a href="/members/edit/<%= m.id %>" class="btn btn-warning" type="button">Editar</a></td>
                       <td style="text-align:center"><a href="/members/delete/<%= m.id %>" class="btn btn-danger" type="button" data-method='delete'>Apagar</a></td>
                     </tr>

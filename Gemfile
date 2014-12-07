@@ -34,6 +34,8 @@ gem 'rails_12factor', group: :production
 
 gem "carrierwave"
 
+gem 'bootstrap-tooltip-rails'
+
 gem 'kaminari'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
