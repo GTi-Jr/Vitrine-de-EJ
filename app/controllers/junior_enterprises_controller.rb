@@ -19,9 +19,13 @@ class JuniorEnterprisesController < ApplicationController
     @junior_enterprise.save
     @user = User.find(@junior_enterprise.user_id)
 
+    streeAddress = @junior_enterprise.address.tr(",-/", " ")
+    streeAddress = streeAddress.split.join(" ")
+    streeAddress = streeAddress.tr(" ", "+")
+
 
     if ( !@junior_enterprise.state.blank? && !@junior_enterprise.city.blank? && !@junior_enterprise.address.blank?)
-      @mapAddress = @junior_enterprise.address.tr(" ", "+")+","+@junior_enterprise.city.tr(" ", "+")+","+@junior_enterprise.state.tr(" ", "+")
+      @mapAddress = streeAddress + "," + @junior_enterprise.city.tr(" ", "+") + "," + @junior_enterprise.state.tr(" ", "+")
     end
   end
 
