@@ -7,6 +7,7 @@ class MembersController < ApplicationController
       @members = Member.all.page(params[:page]).per(10)
       render template: "admin/member_index"
     else
+      number_of_messages
       @members = current_user.junior_enterprise.members.page(params[:page]).per(10)
     end 
   end

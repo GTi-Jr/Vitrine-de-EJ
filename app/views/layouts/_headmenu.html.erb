@@ -6,6 +6,20 @@
         <li class="profile-info dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <img class="img-circle" alt="" style="width:64px; height:64px; border-radius:50%;" src="<%= current_user.junior_enterprise.logo_url %>"><%= current_user.junior_enterprise.name %></a>
         </li>
       </ul>
+      <% if @number_of_messages > 0 %>
+	      <ul class="nav top-menu hidden-xs notify-row fadeInRightBig animated">
+	        <li class="dropdown" id="header_inbox_bar"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span class="badge bg-important"><%= @number_of_messages %></span> </a>
+	          <ul class="dropdown-menu extended inbox">
+	            <div class="notify-arrow notify-arrow-red"></div>
+	            <li>
+	              <p class="red">Você tem <%= @number_of_messages %> novas mensagens </p>
+	            </li>                
+	            <li class="external"> <a href="/messages">Ver mensagens</a> </li>
+	          </ul>
+	        </li>
+	      </ul>
+	     <% end %>
     </div>
   </div>
 </div>
+

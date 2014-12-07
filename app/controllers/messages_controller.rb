@@ -25,7 +25,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)    
-    @message.junior_enterprise_id = params[:id]
+    @message.junior_enterprise_id = params[:id]    
+    @message.read = false
 
     respond_to do |format|
       if @message.save

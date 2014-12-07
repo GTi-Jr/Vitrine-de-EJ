@@ -24,6 +24,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :loged_in?
 
+  def number_of_messages
+    @number_of_messages = current_user.junior_enterprise.messages.where('read = ?', false).length
+  end 
+  helper_method :number_of_messages
+
   def check_and_redirect
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
     if @current_user == nil

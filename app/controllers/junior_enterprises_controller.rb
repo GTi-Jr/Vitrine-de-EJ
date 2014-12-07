@@ -1,5 +1,6 @@
 class JuniorEnterprisesController < ApplicationController
   before_action :set_junior_enterprise, only: [:edit, :update, :destroy]
+  before_action :number_of_messages, only: [:members, :edit, :dashboard]
 
   # GET /junior_enterprises
   # GET /junior_enterprises.json
@@ -148,6 +149,13 @@ class JuniorEnterprisesController < ApplicationController
   end
 
   def messages
+    @number_of_messages = 0
+    @messages = current_user.junior_enterprise.messages.page(params[:page]).per(10)
+
+    @messages.where('read = ?', false).each do |me|
+      me.read = true
+      me.save
+    end
   end
 
   private
