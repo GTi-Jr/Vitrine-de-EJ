@@ -20,6 +20,8 @@
                     <th>Nome</th>
                     <th>Cargo</th>
                     <th>Empresa</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
                     <th>Foto</th>                    
                     <th></th>                    
                     <th></th>
@@ -35,6 +37,8 @@
                       <% else %>
                         <td><%= JuniorEnterprise.find(m.junior_enterprise_id).name %></td>
                       <% end %>
+                      <td><%= m.phone %></td>
+                      <td><%= m.email %></td>
                       <td><%= image_tag(m.photo_url, style: "width:120px; height:120px ") %></td>
                       <td style="text-align:center"><a href="/admin/members/edit/<%= m.id %>" class="btn btn-warning" type="button">Editar</a></td>
                       <td style="text-align:center"><a href="/admin/members/delete/<%= m.id %>" class="btn btn-danger" type="button">Deletar</a></td>

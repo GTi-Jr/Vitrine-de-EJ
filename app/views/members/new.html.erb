@@ -55,6 +55,18 @@
                                   </td>
                                 </tr>
                                 <tr>
+                                  <td align="right">Telefone</td>
+                                  <td align="left">
+                                    <%= f.text_field :phone, class: "txtBox", placeholder: "Telefone"  %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="right">E-mail</td>
+                                  <td align="left">
+                                    <%= f.text_field :email, class: "txtBox", placeholder: "E-mail"  %>
+                                  </td>
+                                </tr>
+                                <tr>
                                   <td align="right">Foto</td>
                                   <td align="left" id="photo" rel="tooltip" title="Use de imagens com fundo branco e resolução de até no máximo 120x120.">  
                                     <%= f.file_field :photo, class: "txtBox" %>
