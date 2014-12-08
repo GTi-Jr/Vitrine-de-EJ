@@ -14,6 +14,7 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
+    number_of_messages
     @member = Member.new
     @junior_enterprises = JuniorEnterprise.all
     if is_admin?
@@ -23,6 +24,7 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+    number_of_messages
     @member = Member.find(params[:id])
     @junior_enterprises = JuniorEnterprise.all
     if is_admin?      
