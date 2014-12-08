@@ -25,7 +25,11 @@ class ApplicationController < ActionController::Base
   helper_method :loged_in?
 
   def number_of_messages
-    @number_of_messages = current_user.junior_enterprise.messages.where('read = ?', false).length
+    if current_user.junior_enterprise != nil
+      @number_of_messages = current_user.junior_enterprise.messages.where('read = ?', false).length
+    else
+      @number_of_messages = 0
+    end
   end 
   helper_method :number_of_messages
 
