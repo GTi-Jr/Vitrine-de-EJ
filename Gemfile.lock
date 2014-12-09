@@ -86,6 +86,9 @@ GEM
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     hike (1.2.3)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.11)
     inflecto (0.0.2)
     ipaddress (0.8.0)
@@ -106,6 +109,7 @@ GEM
     mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
@@ -181,6 +185,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   fog
   font-awesome-rails
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   kaminari

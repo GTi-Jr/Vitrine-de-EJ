@@ -37,6 +37,8 @@ gem "carrierwave"
 gem 'bootstrap-tooltip-rails'
 
 gem 'kaminari'
+
+gem 'httparty'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
