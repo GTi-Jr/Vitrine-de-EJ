@@ -67,6 +67,7 @@ class UsersController < ApplicationController
           format.html { redirect_to "/log_in", notice: 'Sua senha foi enviada para seu e-mail' }
         end
       else
+        @errors = JSON.parse(result.body)
         format.html { render :new }
       end
     end
@@ -79,10 +80,13 @@ class UsersController < ApplicationController
       
     result = HTTParty.put("http://jeapi.herokuapp.com/users/#{params[:id]}",
     :body => {:email => @user.email, :password => @user.password, :function => @user.function, :token => JEAPI_KEY  })    
-
-    if is_admin?
-      redirect_to "/admin/users"
-    end 
+    if result.code == 204
+      if is_admin?
+        redirect_to "/admin/users"
+      end 
+    else
+      flash[:error] = result.errors
+    end
   end
 
   # DELETE /users/1
