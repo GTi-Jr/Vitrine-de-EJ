@@ -3,20 +3,14 @@ class FeedbackController < ApplicationController
   def feedback
   end
 
-  def feedback_sent
-    @message = Message.new
+  def feedback_sent    
+    result = HTTParty.post("http://jeapi.herokuapp.com/feedback",
+    :body => {:text => params[:text], :email => params[:email], :token => JEAPI_KEY  })
 
-    respond_to do |format|      
-
-      if params[:text] != nil && params[:text] != ""
-        @message.text = params[:text]
-        @message.email = params[:email]
-
-        AdmNotifier.send_feedback(@message).deliver
-        format.html { redirect_to "/"}
-      else        
-        format.html { redirect_to "/"}
-      end
+    if result.code == 200 
+      redirect_to "/"
+    else
+      redirect_to "/"
     end
   end
 end

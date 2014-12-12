@@ -39,6 +39,7 @@ gem 'bootstrap-tooltip-rails'
 gem 'kaminari'
 
 gem 'httparty'
+gem 'httmultiparty'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

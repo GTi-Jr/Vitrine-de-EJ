@@ -1,3 +1,3 @@
 ADM_EMAIL = "gui.carneiro15@gmail.com"
 
-JEAPI_KEY = "5yGYS6hEJ9UFxxP0v1EUUV2JjAI"
+JEAPI_KEY = "Vjo-2zji9H-D_0fZubyBjfgIXco"

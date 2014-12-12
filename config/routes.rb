@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get "/members" => "members#index", :as => "members"
   get "/member/:id" => "members#show", :as => "member"
   get "/members/edit/:id" => "members#edit"
-  patch '/member/:id' => "members#update", :as => 'update_member'
+  put '/member/:id' => "members#update", :as => 'update_member'
   delete '/members/delete/:id' => "members#destroy"
 
   #Junior Enterprises Routes
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get "/messages" => "junior_enterprises#messages"
   post "/junior_enterprises" => "junior_enterprises#create", :as => "create_junior_enterprise"
   get "/junior_enterprises/edit" => "junior_enterprises#edit", :as => "edit_junior_enterprise"
-  patch "/junior_enterprise" => "junior_enterprises#update", :as => "update_junior_enterprise"
+  put "/junior_enterprises/:id" => "junior_enterprises#update", :as => "update_junior_enterprise"
   get "/junior_enterprises" => "junior_enterprises#index", :as => "junior_enterprises"
   get "/junior_enterprise/:id" => "junior_enterprises#show", :as => "junior_enterprise"
   get "/dashboard" => "junior_enterprises#dashboard", :as => "dashboard"
@@ -49,10 +49,10 @@ Rails.application.routes.draw do
   get '/admin/messages' => "messages#index"
   get '/admin/messages/edit/:id' => "messages#edit"
   get '/admin/messages/new' => "messages#new"
-  post '/message/:id' => "messages#create"
-  post 'admin/messages/' => "messages#create"
+  post '/messages/:id' => "messages#create"
+  post '/messages' => "messages#create"
   get '/admin/messages/delete/:id' => "messages#destroy"  
-  patch "/admin/message/:id" => "messages#update"
+  put "/admin/message/:id" => "messages#update", :as => "update_message"
 
   get '/admin/users' => "users#index", :as => 'admin_users'
   get '/admin/users/edit/:id' => "users#edit"
@@ -73,7 +73,7 @@ Rails.application.routes.draw do
   get "/user/:id" => "users#show", :as => "user"
   get "/recover" => "users#recover", :as => "recover"  
   post "/recover" => "users#recover_email"
-  patch '/user/:id' => "users#update", :as => 'update_user'
+  put '/users/:id' => "users#update", :as => 'update_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

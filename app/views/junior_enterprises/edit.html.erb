@@ -20,7 +20,7 @@
                 <td>
                   <div>
                     <div id="wizard" class="swMain">
-                        <%= form_for(@junior_enterprise) do |f| %>
+                        <%= form_for @junior_enterprise, url: update_junior_enterprise_path(@junior_enterprise.id), :html => { :method => :put }  do |f| %>
                           <% flash.each do |name, msg| %>      
                             <% if msg.is_a?(String) %>
                               <% if flash[:error] -%>
@@ -102,7 +102,7 @@
                                 <tr>
                                   <td align="right">Endereço :</td>
                                   <td align="left">
-                                    <input class="txtBox" id="junior_enterprise_address" name="junior_enterprise[address]" placeholder="Endereço, Rua e Numero" type="text" rel="tooltip" title="Cuidado ao preencher o seu endereço, cheque no Google Maps se há algum resultado.">
+                                    <%= f.text_field :address, class: "txtBox", placeholder: "Endereço", rel: "tooltip", title: "Cuidado ao preencher o seu endereço, cheque no Google Maps se há algum resultado."  %>
                                   </td>
                                 </tr>
                               </tbody>

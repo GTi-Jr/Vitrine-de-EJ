@@ -39,7 +39,7 @@
                   <div id="home" class="tab-pane active cont">                  
                     <p>
                       <a href="#">
-                        <%= image_tag( @junior_enterprise.logo_url, style: "width:64px; height:64px; border-radius:50%;") %>
+                        <%= image_tag( @junior_enterprise.logo, style: "width:64px; height:64px; border-radius:50%;") %>
                       </a>
                     </p>
                     <div class="row">
@@ -119,11 +119,11 @@
                                         <div class="bio-desk">                  
                                             <p>
                                               <a href="#">
-                                                <%= image_tag( m.photo_url, style: "width:64px; height:64px; border-radius:50%;") %>
+                                                <%= image_tag( m["photo"], style: "width:64px; height:64px; border-radius:50%;") %>
                                               </a>
                                             </p>
-                                            <h4 class="red"><%= m.name %></h4>
-                                            <p><%= m.position%></p>
+                                            <h4 class="red"><%= m["name"] %></h4>
+                                            <p><%= m["position"]%></p>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                   <div id="messages" class="tab-pane">
                     <div class="panel-body bio-graph-info">
                               <h1> Entre em contato </h1>
-                              <%= form_for(@message , url: "/message/#{@junior_enterprise.id}") do |f| %>
+                              <%= form_for @message, url: "/message/#{@junior_enterprise.id}", :html => { :method => :post }  do |f| %>
                                 <% flash.each do |name, msg| %>      
                                   <% if msg.is_a?(String) %>
                                     <% if flash[:error] -%>

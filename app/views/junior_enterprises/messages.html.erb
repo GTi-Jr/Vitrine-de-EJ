@@ -25,14 +25,14 @@
                           <% @messages.each do |m| %>
                             <div class="panel panel-default">
                               <div class="panel-heading">
-                                <h4 class="panel-title"> <a href="#ac<%= @i %>" data-parent="#accordion3" data-toggle="collapse" class="collapsed"> <i class="fa fa-angle-right"></i> <%= m.name %> </a> </h4>
+                                <h4 class="panel-title"> <a href="#ac<%= @i %>" data-parent="#accordion3" data-toggle="collapse" class="collapsed"> <i class="fa fa-angle-right"></i> <%= m["name"] %> </a> </h4>
                               </div>
                               <div class="panel-collapse collapse" id="ac<%= @i %>">
-                                <div class="panel-body"> <%= m.text %> </div>
+                                <div class="panel-body"> <%= m["text"] %> </div>
 
                                 <div class="panel-body">Contato: 
-                                  <p>Telefone: <%= m.phone%></p>
-                                  <p>E-Mail: <%= m.email %></p>
+                                  <p>Telefone: <%= m["phone"]%></p>
+                                  <p>E-Mail: <%= m["email"] %></p>
                                 </div>
                               </div>
                             </div>

@@ -10,7 +10,14 @@ class SessionController < ApplicationController
   end
 
   def create
-    user = User.find_by password: params[:password], email: params[:email]
+    result = HTTParty.get("http://jeapi.herokuapp.com/log_in", 
+    :body => { password: params[:password], email: params[:email], token: JEAPI_KEY })
+
+    user = OpenStruct.new(ActiveSupport::JSON.decode(result.body))
+
+    print(">>>>>>>>>>>>>>>")
+    print(user)
+
     if user != nil
       session[:user_id] = user.id
       if is_admin?
