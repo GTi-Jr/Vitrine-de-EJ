@@ -94,6 +94,7 @@ class MembersController < ApplicationController
     result = HTTParty.post("http://jeapi.herokuapp.com/members",
     :body => {:name => @member.name, :phone => @member.phone, :email => @member.email, :photo => @member.photo_url.to_s, :position => @member.position, :junior_enterprise_id => @member.junior_enterprise_id, :token => JEAPI_KEY  })
 
+    @member.destroy
     if result.code == 201
       if is_admin?(@current_user)         
         redirect_to "/admin/members"

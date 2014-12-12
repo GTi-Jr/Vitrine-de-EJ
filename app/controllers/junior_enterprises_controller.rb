@@ -96,6 +96,7 @@ class JuniorEnterprisesController < ApplicationController
       :body => {:name => @junior_enterprise.name, :user_id => current_user.id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training, :token => JEAPI_KEY  })
     end
 
+    @junior_enterprise.destroy
     respond_to do |format|
       if result.code == 201 or result.code == 200 
         if is_admin?          
