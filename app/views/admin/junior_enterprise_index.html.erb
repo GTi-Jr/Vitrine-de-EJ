@@ -41,7 +41,7 @@
                   <% @junior_enterprises.each do |je| %>
                     <tr>
                       <td><%= je.name %></td>
-                      <td><%= image_tag(je.logo_url, style: "width:120px; height:120px ") %></td>
+                      <td><%= image_tag(je.logo, style: "width:120px; height:120px ") %></td>
                       <td><%= je.site %></td>
                       <td><%= je.phone %></td>
                       <td><%= je.youtube %></td>

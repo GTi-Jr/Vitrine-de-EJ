@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <ul class="user-info pull-right fadeInLeftBig animated">
-        <li class="profile-info dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <img class="img-circle" alt="" style="width:64px; height:64px; border-radius:50%;" src="<%= current_user.junior_enterprise.logo_url %>"><%= current_user.junior_enterprise.name %></a>
+        <li class="profile-info dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <img class="img-circle" alt="" style="width:64px; height:64px; border-radius:50%;" src="<%= @current_user.junior_enterprise.logo %>"><%= @current_user.junior_enterprise.name %></a>
         </li>
       </ul>
       <% if @number_of_messages > 0 %>

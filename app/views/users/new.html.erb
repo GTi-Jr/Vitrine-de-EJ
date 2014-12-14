@@ -4,40 +4,6 @@
 	  <h2 class="login-form-signin-heading">Cadastre sua Empresa Junior</h2>
 	  <div class="login-wrap">
 	    <%= form_for(@user) do |f| %>
-	      <% flash.each do |name, msg| %>      
-	        <% if msg.is_a?(String) %>
-	          <% if flash[:error] -%>
-	            <div class="alert alert-danger" >
-	              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	              <%= content_tag :div, msg, :id => "flash_#{name}" %>
-	            </div>
-	          <% end %>
-
-	          <% if flash[:alert] -%>
-	            <div class="alert alert-warning" >
-	              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	              <%= content_tag :div, msg, :id => "flash_#{name}" %>
-	            </div>
-	          <% end %>
-
-	          <% if flash[:notice] -%>
-	            <div class="alert alert-success" >
-	              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	              <%= content_tag :div, msg, :id => "flash_#{name}" %>
-	            </div>
-	          <% end %>
-	        <% end %>
-	      <% end %> 
-
-	      <% if @user.errors.any? %>    
-              <% @user.errors.full_messages.each do |msg| %>
-                <div class= "alert alert-danger">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <%= msg %>
-                </div>
-              <% end %>    
-          <% end %>
-
 	      <div class="form-group has-feedback lg left-feedback no-label">
 	      	<input class="form-control" id="user_email" name="user[email]" placeholder="Email da Empresa Junior" type="text">
 	      </div>

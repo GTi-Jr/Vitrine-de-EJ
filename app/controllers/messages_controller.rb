@@ -1,76 +1,99 @@
 class MessagesController < ApplicationController  
-  before_action :set_message, only: [:edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token
+  before_action :set_message, only: [:edit, :destroy]
 
   def index
-    @messages = Message.all.page(params[:page]).per(10)
-    if is_admin?
-      render template: "admin/message_index"
-    end 
+    @messages = []
+
+    result = HTTParty.get("http://jeapi.herokuapp.com/messages", 
+    :body => { :token => JEAPI_KEY })
+
+    ActiveSupport::JSON.decode(result.body).each do |message|
+      @messages << Message.new(message)
+    end
+
+    @messages = Kaminari.paginate_array(@messages).page(params[:page]).per(10)
+    
+    is_admin? ? (render template: "admin/message_index") : ()
   end
 
   def new
     @message = Message.new
-    @junior_enterprises = JuniorEnterprise.all
-    if is_admin?
-      render template: "admin/message_new"
-    end 
+    @junior_enterprises = []
+
+    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises", 
+    :body => { :token => JEAPI_KEY })
+
+    ActiveSupport::JSON.decode(result.body).each do |junior_enterprise|
+      //
+      junior_enterprise.delete("messages")
+      junior_enterprise.delete("members")
+      //
+
+      @junior_enterprises << JuniorEnterprise.new(junior_enterprise)
+    end
+
+    is_admin? ? (render template: "admin/message_new") : ()
   end
 
   def edit
-    if is_admin?
-      render template: "admin/message_edit"
-    end 
+    is_admin? ? (render template: "admin/message_edit") : ()
   end
 
   def create
+    current_user
     @message = Message.new(message_params)    
-    @message.junior_enterprise_id = params[:id]    
-    @message.read = false
+    
+    result = HTTParty.post("http://jeapi.herokuapp.com/messages",
+    :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => params["id"], :read => false, :token => JEAPI_KEY  })
 
-    respond_to do |format|
-      if @message.save
-        if is_admin?
-          UserNotifier.send_message(@message).deliver
-          format.html { redirect_to "/admin/messages"}
-        else
-          UserNotifier.send_message(@message).deliver
-          format.html { redirect_to "/junior_enterprise/#{@message.junior_enterprise_id}"}
-        end
+    if result.code == 201
+      if is_admin?(@current_user)         
+        redirect_to "/admin/messages", notice: "Mensagem enviada"        
       else
-        format.html { render :new }
+        redirect_to "/junior_enterprise/#{params[:id]}", notice: "Mensagem enviada"
       end
+    else
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/message_new") : (render :new)  
     end
   end
 
   def update
-    respond_to do |format|
-      if @message.update(message_params)
-        if is_admin?          
-          format.html { redirect_to "/admin/messages"}
-        end
-      else
-        format.html { render :edit }
-      end
+    current_user
+    @message = Message.new(message_params)
+
+    result = HTTParty.put("http://jeapi.herokuapp.com/messages/#{params[:id]}",
+    :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => @message.junior_enterprise_id, :read => false, :token => JEAPI_KEY  })
+
+    if result.code == 204      
+      is_admin? ? (redirect_to "/admin/messages") : ()
+    else
+      @errors = JSON.parse(result.body)      
+      is_admin?(@current_user) ? (render template: "admin/message_edit") : (render :edit)   
     end
   end
 
 
   def destroy
-    @message.destroy
-    respond_to do |format|
-      if is_admin?        
-        format.html { redirect_to "/admin/messages" }
-      else        
-        format.html { redirect_to "/dashboard" }
-      end
+    current_user
+    is_admin?(@current_user) ? @id = @message.id : @id = params[:id] 
+
+    result = HTTParty.delete("http://jeapi.herokuapp.com/messages/#{@id}", 
+    :body => { :token => JEAPI_KEY })   
+
+    if is_admin?(@current_user)
+      redirect_to "/admin/messages", alert: "Mensagem deletada"
+    else
+      redirect_to "/messages", alert: "Mensagem deletada"
     end
   end
 
   private
     def set_message
       if is_admin?
-        @message = Message.find(params[:id])
+        result = HTTParty.get("http://jeapi.herokuapp.com/messages/#{params[:id]}", 
+         :body => { :token => JEAPI_KEY })
+        @message = Message.new(ActiveSupport::JSON.decode(result.body))
       end
     end
 

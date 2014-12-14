@@ -3,30 +3,6 @@
   	<div class="login-logo"><%= image_tag("logo.png") %></div>
     <div class="login-wrap">
       <%= form_tag do %>
-        <% flash.each do |name, msg| %>      
-          <% if msg.is_a?(String) %>
-            <% if flash[:error] -%>
-              <div class="alert alert-danger" >
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <%= content_tag :div, msg, :id => "flash_#{name}" %>
-              </div>
-            <% end %>
-
-            <% if flash[:alert] -%>
-              <div class="alert alert-warning" >
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <%= content_tag :div, msg, :id => "flash_#{name}" %>
-              </div>
-            <% end %>
-
-            <% if flash[:notice] -%>
-              <div class="alert alert-success" >
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <%= content_tag :div, msg, :id => "flash_#{name}" %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>  
         <div class="form-group has-feedback lg left-feedback no-label">
           <%= text_field_tag :email, params[:email], class: "form-control", placeholder: "Email" %>
         </div>
