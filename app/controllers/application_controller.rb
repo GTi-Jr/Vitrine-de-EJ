@@ -28,9 +28,11 @@ class ApplicationController < ActionController::Base
   def is_admin?(object = current_user)
     if object != nil
       if object.function == "admin"
-        true
+        return true
       end
     end
+
+    return false
   end
   helper_method :is_admin?
 

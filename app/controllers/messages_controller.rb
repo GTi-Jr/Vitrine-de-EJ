@@ -13,9 +13,7 @@ class MessagesController < ApplicationController
 
     @messages = Kaminari.paginate_array(@messages).page(params[:page]).per(10)
     
-    if is_admin?
-      render template: "admin/message_index"
-    end    
+    is_admin? ? (render template: "admin/message_index") : ()
   end
 
   def new
@@ -34,15 +32,11 @@ class MessagesController < ApplicationController
       @junior_enterprises << JuniorEnterprise.new(junior_enterprise)
     end
 
-    if is_admin?
-      render template: "admin/message_new"
-    end 
+    is_admin? ? (render template: "admin/message_new") : ()
   end
 
   def edit
-    if is_admin?
-      render template: "admin/message_edit"
-    end 
+    is_admin? ? (render template: "admin/message_edit") : ()
   end
 
   def create
@@ -54,12 +48,13 @@ class MessagesController < ApplicationController
 
     if result.code == 201
       if is_admin?(@current_user)         
-        redirect_to "/admin/messages"
+        redirect_to "/admin/messages", notice: "Mensagem enviada"        
       else
-        redirect_to "/junior_enterprise/#{params[:id]}"
+        redirect_to "/junior_enterprise/#{params[:id]}", notice: "Mensagem enviada"
       end
     else
-      render :new 
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/message_new") : (render :new)  
     end
   end
 
@@ -71,9 +66,10 @@ class MessagesController < ApplicationController
     :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => @message.junior_enterprise_id, :read => false, :token => JEAPI_KEY  })
 
     if result.code == 204      
-      if is_admin?          
-        redirect_to "/admin/messages"
-      end
+      is_admin? ? (redirect_to "/admin/messages") : ()
+    else
+      @errors = JSON.parse(result.body)      
+      is_admin?(@current_user) ? (render template: "admin/message_edit") : (render :edit)   
     end
   end
 
@@ -85,7 +81,11 @@ class MessagesController < ApplicationController
     result = HTTParty.delete("http://jeapi.herokuapp.com/messages/#{@id}", 
     :body => { :token => JEAPI_KEY })   
 
-    is_admin?(@current_user) ? redirect_to "/admin/messages" : redirect_to "/messages"
+    if is_admin?(@current_user)
+      redirect_to "/admin/messages", alert: "Mensagem deletada"
+    else
+      redirect_to "/messages", alert: "Mensagem deletada"
+    end
   end
 
   private

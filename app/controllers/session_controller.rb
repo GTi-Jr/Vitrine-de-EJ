@@ -15,24 +15,17 @@ class SessionController < ApplicationController
 
     user = OpenStruct.new(ActiveSupport::JSON.decode(result.body))
 
-    print(">>>>>>>>>>>>>>>")
-    print(user)
-
     if user != nil
       session[:user_id] = user.id
-      if is_admin?
-        redirect_to "/admin/users", :notice => "Logged in!"
-      else
-        redirect_to dashboard_path, :notice => "Logged in!"
-      end
+      is_admin? ? (redirect_to "/admin/users", :notice => "Logged in!") : (redirect_to dashboard_path, :notice => "Logged in!")
     else
-      redirect_to "/log_in", :notice => "Password ou Email inválido"     
+      redirect_to "/log_in", :alert => "Password ou Email inválido"     
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url
+    redirect_to root_url, :notice => "Logged Out!"
   end
 
 end

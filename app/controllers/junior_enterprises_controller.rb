@@ -87,31 +87,24 @@ class JuniorEnterprisesController < ApplicationController
     @junior_enterprise = JuniorEnterprise.new(junior_enterprise_params) 
     @junior_enterprise.save!
 
+    is_admin? ? (@user_id = @junior_enterprise.id) : (@user_id = current_user.id) 
 
-    if is_admin?
-      result = HTTParty.post("http://jeapi.herokuapp.com/junior_enterprises",
-      :body => {:name => @junior_enterprise.name, :user_id => @junior_enterprise.id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training, :token => JEAPI_KEY  })
-    else
-      result = HTTParty.post("http://jeapi.herokuapp.com/junior_enterprises",
-      :body => {:name => @junior_enterprise.name, :user_id => current_user.id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training, :token => JEAPI_KEY  })
-    end
-
+    result = HTTParty.post("http://jeapi.herokuapp.com/junior_enterprises",
+    :body => {:name => @junior_enterprise.name, :user_id => @user_id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training, :token => JEAPI_KEY  })
+    
     @junior_enterprise.destroy
-    respond_to do |format|
-      if result.code == 201 or result.code == 200 
-        if is_admin?          
-          format.html { redirect_to "/admin/junior_enterprises"}
-        else
-          format.html { redirect_to "/dashboard"}
-        end
+    if result.code == 201
+      if is_admin? 
+        redirect_to "/admin/junior_enterprises", notice: "Criado com sucesso"
       else
-        format.html { render :new }
+        redirect_to "/dashboard", notice: "Criado com sucesso"
       end
+    else
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/junior_enterprise_new") : (render :new)  
     end
   end
 
-  # PATCH/PUT /junior_enterprises/1
-  # PATCH/PUT /junior_enterprises/1.json
   def update
     current_user
     @junior_enterprise = JuniorEnterprise.new(junior_enterprise_params)
@@ -124,9 +117,14 @@ class JuniorEnterprisesController < ApplicationController
     
     @junior_enterprise.destroy
     if result.code == 204      
-      if is_admin?(@current_user) ? redirect_to "/admin/junior_enterprises" : redirect_to "/junior_enterprises/edit"
+      if is_admin? @current_user
+        redirect_to "/admin/junior_enterprises", notice: "Editado com sucesso"
+      else
+        redirect_to "/junior_enterprises/edit", notice: "Editado com sucesso"
+      end
     else
-      render :edit
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/junior_enterprise_edit") : (render :edit)  
     end
   end
 
@@ -136,17 +134,15 @@ class JuniorEnterprisesController < ApplicationController
     result = HTTParty.delete("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}", 
     :body => { :token => JEAPI_KEY })
 
-    if is_admin?        
-      redirect_to "/admin/junior_enterprises"
-    else        
-      redirect_to "/log_out"
+    if is_admin? 
+      redirect_to "/admin/junior_enterprises", notice: "Deletado com sucesso"
+    else
+      redirect_to "/log_out", notice: "Deletado com sucesso"
     end
   end
 
   def dashboard
-    if current_user.junior_enterprise == nil
-      redirect_to "/junior_enterprises/new"
-    end
+    current_user.junior_enterprise.nil? ? (redirect_to "/junior_enterprises/new") : ""
   end
 
   def find

@@ -48,9 +48,10 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    current_user
     @user = User.new(user_params)    
     
-    if is_admin?
+    if is_admin?(@current_user)
       function = user_params["function"]
     else
       function = "user"
@@ -59,17 +60,11 @@ class UsersController < ApplicationController
     result = HTTParty.post("http://jeapi.herokuapp.com/users",
     :body => { :email => @user.email, :function => function, :token => JEAPI_KEY  })
 
-    respond_to do |format|
-      if result.code == 201
-        if is_admin?
-          format.html { redirect_to "/admin/users"}
-        else
-          format.html { redirect_to "/log_in", notice: 'Sua senha foi enviada para seu e-mail' }
-        end
-      else
-        @errors = JSON.parse(result.body)
-        format.html { render :new }
-      end
+    if result.code == 201
+      is_admin?(@current_user) ? (redirect_to "/admin/users") : (redirect_to "/log_in", notice: 'Sua senha foi enviada para seu e-mail')
+    else
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/user_new") : (render :new)      
     end
   end
 
@@ -81,11 +76,10 @@ class UsersController < ApplicationController
     result = HTTParty.put("http://jeapi.herokuapp.com/users/#{params[:id]}",
     :body => {:email => @user.email, :password => @user.password, :function => @user.function, :token => JEAPI_KEY  })    
     if result.code == 204
-      if is_admin?
-        redirect_to "/admin/users"
-      end 
-    else
-      flash[:error] = result.errors
+      is_admin? ? (redirect_to "/admin/users", notice: 'Atualização realizada com sucesso') : ()
+    else      
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/user_edit") : (render :edit)      
     end
   end
 
@@ -95,11 +89,7 @@ class UsersController < ApplicationController
     result = HTTParty.delete("http://jeapi.herokuapp.com/users/#{params[:id]}", 
     :body => { :token => JEAPI_KEY })
 
-    if is_admin?
-      redirect_to "/admin/users"
-    else
-      redirect_to "/"
-    end
+    is_admin? ? (redirect_to "/admin/users", :notice => "Usuário deletado") : (redirect_to "/", :notice => "Usuário deletado")
   end
 
   def recover

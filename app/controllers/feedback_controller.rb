@@ -8,9 +8,9 @@ class FeedbackController < ApplicationController
     :body => {:text => params[:text], :email => params[:email], :token => JEAPI_KEY  })
 
     if result.code == 200 
-      redirect_to "/"
+      redirect_to "/", notice: "Obrigado pelo Feedback"
     else
-      redirect_to "/"
+      redirect_to "/feedback", alert: "Falha ao envio do Feedback"
     end
   end
 end

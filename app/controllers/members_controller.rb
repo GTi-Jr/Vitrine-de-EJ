@@ -22,14 +22,9 @@ class MembersController < ApplicationController
     @members = Kaminari.paginate_array(@members).page(params[:page]).per(10)
 
 
-    if is_admin?(@current_user)
-      render template: "admin/member_index"
-    else
-      number_of_messages
-    end 
+    is_admin?(@current_user) ? ( render template: "admin/member_index" ) : (number_of_messages)
   end
 
-  # GET /members/new
   def new
     number_of_messages
     current_user
@@ -45,24 +40,19 @@ class MembersController < ApplicationController
       @junior_enterprises << OpenStruct.new(junior_enterprise)
     end
 
-    if is_admin?
-      render template: "admin/member_new"
-    end 
+    is_admin?(@current_user) ? (render template: "admin/member_new") : ()
   end
 
   def edit
     current_user
     number_of_messages
 
-
     @junior_enterprises = []
 
     result_member = HTTParty.get("http://jeapi.herokuapp.com/members/#{params[:id]}", 
-     :body => { :token => JEAPI_KEY })
-
+    :body => { :token => JEAPI_KEY })
 
     @member = Member.new(ActiveSupport::JSON.decode(result_member.body))
-
 
     result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises", 
     :body => { :token => JEAPI_KEY })
@@ -71,23 +61,16 @@ class MembersController < ApplicationController
       @junior_enterprises << OpenStruct.new(junior_enterprise)
     end
 
-
-    if is_admin?(@current_user)    
-      render template: "admin/member_edit"
-    end 
+    is_admin?(@current_user) ? (render template: "admin/member_edit") : () 
   end
 
-  # POST /members
-  # POST /members.json
   def create
     number_of_messages
     current_user
 
     @member = Member.new(member_params)
 
-    if !is_admin?(@current_user)
-      @member.junior_enterprise_id = @current_user.junior_enterprise.id
-    end 
+    is_admin?(@current_user) ? () : (@member.junior_enterprise_id = @current_user.junior_enterprise.id)
 
     @member.save!
 
@@ -97,12 +80,13 @@ class MembersController < ApplicationController
     @member.destroy
     if result.code == 201
       if is_admin?(@current_user)         
-        redirect_to "/admin/members"
+        redirect_to "/admin/members", notice: "Criado com sucesso"
       else
-        redirect_to "/members"
+        redirect_to "/members", notice: "Criado com sucesso"
       end
     else
-      render :new 
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/member_new") : (render :new)  
     end
   end
 
@@ -110,12 +94,11 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1.json
   def update    
     current_user
+
     @member = Member.new(member_params)
     @member.save!
 
-    if !is_admin?(@current_user)
-      @member.junior_enterprise_id = current_user.junior_enterprise.id
-    end
+    is_admin?(@current_user) ? () : (@member.junior_enterprise_id = current_user.junior_enterprise.id)
 
     result = HTTParty.put("http://jeapi.herokuapp.com/members/#{params[:id]}",
     :body => {:name => @member.name, :phone => @member.phone, :email => @member.email, :photo => @member.photo_url.to_s, :position => @member.position, :junior_enterprise_id => @member.junior_enterprise_id, :token => JEAPI_KEY  })
@@ -123,12 +106,13 @@ class MembersController < ApplicationController
     @member.destroy  
     if result.code == 204  
       if is_admin?(@current_user)
-        redirect_to "/admin/members"
+        redirect_to "/admin/members", notice: "Editado com sucesso"
       else          
-        redirect_to "/members"
+        redirect_to "/members", notice: "Editado com sucesso"
       end
     else
-      render :edit
+      @errors = JSON.parse(result.body)
+      is_admin?(@current_user) ? (render template: "admin/member_edit") : (render :edit)  
     end
   end
 
@@ -139,9 +123,9 @@ class MembersController < ApplicationController
     :body => { :token => JEAPI_KEY })
 
     if is_admin?
-      redirect_to "/admin/members"
+      redirect_to "/admin/members", notice: "Deletado com sucesso"
     else        
-      redirect_to "/members"
+      redirect_to "/members", notice: "Deletado com sucesso"
     end 
   end
 

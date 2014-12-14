@@ -6,7 +6,7 @@ class JuniorEnterprise < ActiveRecord::Base
 	has_many :messages	
 
 	mount_uploader :logo, ImageUploader
-	skip_callback :destroy, :after, :remove_logo!
+	skip_callback :commit, :after, :remove_logo!
 
   /Auto zerando contador ao criar/
   def set_to_zero(column)

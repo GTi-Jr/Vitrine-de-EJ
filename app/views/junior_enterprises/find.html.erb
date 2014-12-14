@@ -23,30 +23,6 @@
                       <div class="panel-body bio-graph-info">
                           <div class="row">
                               <%= form_tag search_path, :method => 'get' do %>
-                              <% flash.each do |name, msg| %>      
-                                <% if msg.is_a?(String) %>
-                                  <% if flash[:error] -%>
-                                    <div class="alert alert-danger" >
-                                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-                                    </div>
-                                  <% end %>
-
-                                  <% if flash[:alert] -%>
-                                    <div class="alert alert-warning" >
-                                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-                                    </div>
-                                  <% end %>
-
-                                  <% if flash[:notice] -%>
-                                    <div class="alert alert-success" >
-                                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-                                    </div>
-                                  <% end %>
-                                <% end %>
-                              <% end %>  
                               <p>
                                 <h5><strong>Você sabe o nome da Empresa Junior?</strong><h5>
                                 <div class="form-group has-feedback lg left-feedback no-label">
