@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
       end
     else
       @errors = JSON.parse(result.body)
-      is_admin?(@current_user) ? (render template: "admin/message_new") : (render :new)  
+      is_admin?(@current_user) ? (render template: "admin/message_new") : (redirect_to :back, alert: "Preencha os dados corretamente")  
     end
   end
 

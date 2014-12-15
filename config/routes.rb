@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get '/admin/messages/new' => "messages#new"
   post '/messages/:id' => "messages#create"
   post '/messages' => "messages#create"
+  delete '/messages/:id' => "messages#destroy"
   get '/admin/messages/delete/:id' => "messages#destroy"  
   put "/admin/message/:id" => "messages#update", :as => "update_message"
 

@@ -34,6 +34,8 @@
                                   <p>Telefone: <%= m["phone"]%></p>
                                   <p>E-Mail: <%= m["email"] %></p>
                                 </div>
+
+                                <a class="btn btn-warning pull-right" style="margin: 5px"  href="messages/<%= m["id"] %>" data-method="delete"> Deletar </a>
                               </div>
                             </div>
                             <% @i = @i + 1 %>

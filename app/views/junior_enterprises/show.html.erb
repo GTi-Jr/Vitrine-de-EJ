@@ -136,7 +136,7 @@
                   <div id="messages" class="tab-pane">
                     <div class="panel-body bio-graph-info">
                               <h1> Entre em contato </h1>
-                              <%= form_for @message, url: "/message/#{@junior_enterprise.id}", :html => { :method => :post }  do |f| %>
+                              <%= form_for @message, url: "/messages/#{@junior_enterprise.id}", :html => { :method => :post }  do |f| %>
                                 <div class="form-group">
                                       <label class="col-lg-2 control-label"> Mensagem </label>
                                       <div class="col-lg-10">
@@ -180,3 +180,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(function(){
+    $("#message_email").inputmask({ alias: "email"});
+    $("#message_phone").inputmask("(99)9999-9999");
+  })
+</script>
