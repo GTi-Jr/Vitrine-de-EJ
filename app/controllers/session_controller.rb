@@ -13,9 +13,9 @@ class SessionController < ApplicationController
     result = HTTParty.get("http://jeapi.herokuapp.com/log_in", 
     :body => { password: params[:password], email: params[:email], token: JEAPI_KEY })
 
-    user = OpenStruct.new(ActiveSupport::JSON.decode(result.body))
 
-    if user != nil
+    if result.code != 204
+      user = OpenStruct.new(ActiveSupport::JSON.decode(result.body))
       session[:user_id] = user.id
       is_admin? ? (redirect_to "/admin/users", :notice => "Logged in!") : (redirect_to dashboard_path, :notice => "Logged in!")
     else
