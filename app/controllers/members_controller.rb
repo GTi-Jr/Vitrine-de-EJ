@@ -22,7 +22,13 @@ class MembersController < ApplicationController
     @members = Kaminari.paginate_array(@members).page(params[:page]).per(10)
 
 
-    is_admin?(@current_user) ? ( render template: "admin/member_index" ) : (number_of_messages)
+    if is_admin?(@current_user)
+      render template: "admin/member_index"
+    elsif is_federation?
+
+    else
+      number_of_messages
+    end
   end
 
   def new

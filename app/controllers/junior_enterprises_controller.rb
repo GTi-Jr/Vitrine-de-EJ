@@ -19,6 +19,8 @@ class JuniorEnterprisesController < ApplicationController
 
     if is_admin?
       render template: "admin/junior_enterprise_index"
+    elsif is_federation?
+
     end 
   end
 
@@ -53,6 +55,7 @@ class JuniorEnterprisesController < ApplicationController
     @junior_enterprise = JuniorEnterprise.new
     if is_admin?
       render template: "admin/junior_enterprise_new"
+    elsif is_federation?
     end 
   end
 
@@ -60,13 +63,10 @@ class JuniorEnterprisesController < ApplicationController
   def edit
     current_user
 
-    if is_admin?(@current_user)     
-      result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}", 
-      :body => { :token => JEAPI_KEY })
-    else      
-      result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{@current_user.junior_enterprise.id}", 
-      :body => { :token => JEAPI_KEY })
-    end
+    is_admin?(@current_user) ? (@id = params[:id]) : (@id = current_user.junior_enterprise.id)
+
+    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{@id}", 
+    :body => { :token => JEAPI_KEY })
 
     //
     hash = ActiveSupport::JSON.decode(result.body)
