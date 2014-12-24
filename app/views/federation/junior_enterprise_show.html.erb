@@ -1,0 +1,151 @@
+<div id="layout-container">
+  <div id="main" style="left: 0px !important;">  
+    <div class="head-title">
+      <div class="menu-switch">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="row">
+        <div class="col-md-12"></div>
+      </div>  
+    </div>
+    <div class="margin-container">
+      <div class="scrollable wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-heading">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="profile-info col-lg-9 col-lg-offset-1">
+            <h1>
+              <%= @junior_enterprise.name %>
+            </h1>
+            <div class="panel">
+                <div class="bio-graph-heading">
+                  <%= @junior_enterprise.phrase %>
+                </div>
+            </div>
+            <div class="row">
+              <div class="tab-container">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#home">Informações</a></li>
+                  <% if @junior_enterprise.members.count > 0 %>
+                    <li><a data-toggle="tab" href="#profile">Membros</a></li>
+                  <% end %>
+                  <li><a data-toggle="tab" href="#messages">Contato</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div id="home" class="tab-pane active cont">                  
+                    <p>
+                      <a href="#">
+                        <%= image_tag( @junior_enterprise.logo, style: "width:64px; height:64px; border-radius:50%;") %>
+                      </a>
+                    </p>
+                    <div class="row">
+                      <% unless @junior_enterprise.course.blank? %>
+                        <div class="bio-row" style="width:100%">
+                          <p><span>Curso: </span> <%= @junior_enterprise.course %> </p>
+                        </div>
+                      <% end %>
+                      <% unless @user.email.blank? %>
+                        <div class="bio-row" style="width:100%">
+                          <p><span>Email: </span> <%= mail_to @user.email %> </p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.site.blank? %>
+                        <div class="bio-row">
+                          <p><span>Site: </span> <%= link_to @junior_enterprise.site %> </p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.phone.blank? %>
+                        <div class="bio-row">
+                          <p><span>Telefone: </span> <%= @junior_enterprise.phone %> </p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.youtube.blank? %>
+                        <div class="bio-row">
+                          <p><span>Youtube: </span> <%= @junior_enterprise.youtube %></p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.facebook.blank? %>
+                        <div class="bio-row">
+                          <p><span>Facebook: </span><%= @junior_enterprise.facebook %></p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.state.blank? %>
+                        <div class="bio-row">
+                          <p><span>Estado: </span><%= @junior_enterprise.state %></p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.city.blank? %>
+                        <div class="bio-row">
+                          <p><span>Cidade: </span><%= @junior_enterprise.city %></p>
+                        </div>
+                      <% end %>
+                      <% unless @junior_enterprise.address.blank?  %>
+                        <div class="bio-row">
+                          <p><span>Endereço: </span><%= @junior_enterprise.address %></p>
+                        </div>
+                      <% end %>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 col-lg-offset-6">
+                          <div class="panel">
+                              <div class="panel-body">
+                                  <div class="bio-desk">
+                                      <h4>Mapa</h4>
+                                      <iframe
+                                        width="400"
+                                        height="300"
+                                        frameborder="0" style="border:0"
+                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBNrfvod702JNXjN2Csns73js-FRFPXfPI&q=<%= @mapAddress %>">
+                                      </iframe>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>                                
+                    </div>                           
+                  </div>
+                  <% if @junior_enterprise.members.count > 0 %>
+                    <div id="profile" class="tab-pane cont">
+                      <h4>Conheça o nosso time!</h4>
+                      <div>
+                        <div class="row">                          
+                          <% @junior_enterprise.members.each do |m|%>
+                            <div class="col-lg-6">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="bio-desk">                  
+                                            <p>
+                                              <a href="#">
+                                                <%= image_tag( m["photo"], style: "width:64px; height:64px; border-radius:50%;") %>
+                                              </a>
+                                            </p>
+                                            <h4 class="red"><%= m["name"] %></h4>
+                                            <p><%= m["position"]%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                          <% end %>                             
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>              
+            <a href="/find" class="btn btn-info btn-block" style="width: 10%; margin-left: 1%;">Retornar</a>
+            </div>
+          </div>
+        </div>   
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function(){
+    $("#message_email").inputmask({ alias: "email"});
+    $("#message_phone").inputmask("(99)9999-9999");
+  })
+</script>

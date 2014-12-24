@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   private
   def current_user
     unless session[:user_id].blank?
-      result = HTTParty.get("http://jeapi.herokuapp.com/users/#{session[:user_id]}", 
-      :body => { :token => JEAPI_KEY })
+      result = HTTParty.get("http://jeapi.herokuapp.com/users/#{session[:user_id]}", :headers => { 'token' => JEAPI_KEY } )
 
       @current_user = OpenStruct.new(ActiveSupport::JSON.decode(result.body))
       if !@current_user.junior_enterprise.blank?

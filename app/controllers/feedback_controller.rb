@@ -5,7 +5,8 @@ class FeedbackController < ApplicationController
 
   def feedback_sent    
     result = HTTParty.post("http://jeapi.herokuapp.com/feedback",
-    :body => {:text => params[:text], :email => params[:email], :token => JEAPI_KEY  })
+    :body => {:text => params[:text], :email => params[:email] },
+    :headers => { 'token' => JEAPI_KEY } )
 
     if result.code == 200 
       redirect_to "/", notice: "Obrigado pelo Feedback"

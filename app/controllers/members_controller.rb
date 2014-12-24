@@ -4,8 +4,8 @@ class MembersController < ApplicationController
     current_user
     @members = []
 
-    result = HTTParty.get("http://jeapi.herokuapp.com/members", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.get("http://jeapi.herokuapp.com/members",
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result.body).each do |m|
       member = OpenStruct.new(m)
@@ -39,8 +39,8 @@ class MembersController < ApplicationController
     
     @junior_enterprises = []
 
-    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises",
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result.body).each do |junior_enterprise|
       @junior_enterprises << OpenStruct.new(junior_enterprise)
@@ -55,13 +55,13 @@ class MembersController < ApplicationController
 
     @junior_enterprises = []
 
-    result_member = HTTParty.get("http://jeapi.herokuapp.com/members/#{params[:id]}", 
-    :body => { :token => JEAPI_KEY })
+    result_member = HTTParty.get("http://jeapi.herokuapp.com/members/#{params[:id]}",
+    :headers => { 'token' => JEAPI_KEY } )
 
     @member = Member.new(ActiveSupport::JSON.decode(result_member.body))
 
-    result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises", 
-    :body => { :token => JEAPI_KEY })
+    result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises",
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result_je.body).each do |junior_enterprise|
       @junior_enterprises << OpenStruct.new(junior_enterprise)
@@ -81,7 +81,8 @@ class MembersController < ApplicationController
     @member.save!
 
     result = HTTParty.post("http://jeapi.herokuapp.com/members",
-    :body => {:name => @member.name, :phone => @member.phone, :email => @member.email, :photo => @member.photo_url.to_s, :position => @member.position, :junior_enterprise_id => @member.junior_enterprise_id, :token => JEAPI_KEY  })
+    :body => {:name => @member.name, :phone => @member.phone, :email => @member.email, :photo => @member.photo_url.to_s, :position => @member.position, :junior_enterprise_id => @member.junior_enterprise_id },
+    :headers => { 'token' => JEAPI_KEY } )
 
     @member.destroy
     if result.code == 201
@@ -107,7 +108,8 @@ class MembersController < ApplicationController
     is_admin?(@current_user) ? () : (@member.junior_enterprise_id = current_user.junior_enterprise.id)
 
     result = HTTParty.put("http://jeapi.herokuapp.com/members/#{params[:id]}",
-    :body => {:name => @member.name, :phone => @member.phone, :email => @member.email, :photo => @member.photo_url.to_s, :position => @member.position, :junior_enterprise_id => @member.junior_enterprise_id, :token => JEAPI_KEY  })
+    :body => {:name => @member.name, :phone => @member.phone, :email => @member.email, :photo => @member.photo_url.to_s, :position => @member.position, :junior_enterprise_id => @member.junior_enterprise_id },
+    :headers => { 'token' => JEAPI_KEY } )
   
     @member.destroy  
     if result.code == 204  
@@ -125,8 +127,8 @@ class MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
-    result = HTTParty.delete("http://jeapi.herokuapp.com/members/#{params[:id]}", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.delete("http://jeapi.herokuapp.com/members/#{params[:id]}",
+    :headers => { 'token' => JEAPI_KEY } )
 
     if is_admin?
       redirect_to "/admin/members", notice: "Deletado com sucesso"

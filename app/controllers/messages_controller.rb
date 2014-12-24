@@ -4,8 +4,8 @@ class MessagesController < ApplicationController
   def index
     @messages = []
 
-    result = HTTParty.get("http://jeapi.herokuapp.com/messages", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.get("http://jeapi.herokuapp.com/messages",
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result.body).each do |message|
       @messages << Message.new(message)
@@ -24,8 +24,8 @@ class MessagesController < ApplicationController
     @message = Message.new
     @junior_enterprises = []
 
-    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises",
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result.body).each do |junior_enterprise|
       //
@@ -48,7 +48,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)    
     
     result = HTTParty.post("http://jeapi.herokuapp.com/messages",
-    :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => params["id"], :read => false, :token => JEAPI_KEY  })
+    :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => params["id"], :read => false },
+    :headers => { 'token' => JEAPI_KEY } )
 
     if result.code == 201
       if is_admin?(@current_user)         
@@ -67,7 +68,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     result = HTTParty.put("http://jeapi.herokuapp.com/messages/#{params[:id]}",
-    :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => @message.junior_enterprise_id, :read => false, :token => JEAPI_KEY  })
+    :body => {:text => @message.text, :email => @message.email, :phone => @message.phone, :name => @message.name, :junior_enterprise_id => @message.junior_enterprise_id, :read => false },
+    :headers => { 'token' => JEAPI_KEY } )
 
     if result.code == 204      
       is_admin? ? (redirect_to "/admin/messages") : ()
@@ -82,8 +84,8 @@ class MessagesController < ApplicationController
     current_user
     is_admin?(@current_user) ? @id = @message.id : @id = params[:id] 
 
-    result = HTTParty.delete("http://jeapi.herokuapp.com/messages/#{@id}", 
-    :body => { :token => JEAPI_KEY })   
+    result = HTTParty.delete("http://jeapi.herokuapp.com/messages/#{@id}",
+    :headers => { 'token' => JEAPI_KEY } )   
 
     if is_admin?(@current_user)
       redirect_to "/admin/messages", alert: "Mensagem deletada"
@@ -95,8 +97,8 @@ class MessagesController < ApplicationController
   private
     def set_message
       if is_admin?
-        result = HTTParty.get("http://jeapi.herokuapp.com/messages/#{params[:id]}", 
-         :body => { :token => JEAPI_KEY })
+        result = HTTParty.get("http://jeapi.herokuapp.com/messages/#{params[:id]}",
+        :headers => { 'token' => JEAPI_KEY } )
         @message = Message.new(ActiveSupport::JSON.decode(result.body))
       end
     end

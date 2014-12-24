@@ -13,4 +13,14 @@ module ApplicationHelper
 	def toastr(message, type)
 		render inline: javascript_tag("toastr.#{type}('#{message}')")
 	end
+
+	def format_function(function)
+		if (function == "admin")
+			return "Administrador"
+		elsif (function == "federation")
+			return "Federação"
+		else
+			return "Usuário"
+		end
+	end
 end

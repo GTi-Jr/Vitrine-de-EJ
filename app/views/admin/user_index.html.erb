@@ -25,7 +25,8 @@
                   <tr>
                     <th>E-mail</th>
                     <th>Senha</th>
-                    <th>Tipo</th>                    
+                    <th>Tipo</th> 
+                    <th>Estado</th>                      
                     <th></th>                    
                     <th></th>
                   </tr>
@@ -35,7 +36,8 @@
                     <tr>
                       <td><%= u.email %></td>
                       <td><%= u.password %></td>
-                      <td><%= u.function == "admin" ? "Administrador" : "Usuário" %></td>
+                      <td><%= format_function(u.function) %></td>
+                      <td><%= u.state %></td>
                       <td style="text-align:center"><a href="/admin/users/edit/<%= u.id %>" class="btn btn-warning" type="button">Editar</a></td>
                       <td style="text-align:center"><a href="/admin/users/delete/<%= u.id %>" class="btn btn-danger" type="button">Deletar</a></td>
                     </tr>

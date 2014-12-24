@@ -37,9 +37,9 @@ Rails.application.routes.draw do
   get "/dashboard" => "junior_enterprises#dashboard", :as => "dashboard"
   get "/find" => "junior_enterprises#find", :as => "find"
   get "/search" => "junior_enterprises#search", :as => "search"
+  get "/junior_enterprises/:id/seal" => "junior_enterprises#seal"
 
   #Admin Routes
-
   get '/admin/junior_enterprises' => "junior_enterprises#index"
   get '/admin/junior_enterprises/edit/:id' => "junior_enterprises#edit"
   get '/admin/junior_enterprises/new' => "junior_enterprises#new"
@@ -64,6 +64,9 @@ Rails.application.routes.draw do
   get '/admin/members/edit/:id' => "members#edit"
   get '/admin/members/new' => "members#new"
   get '/admin/members/delete/:id' => "members#destroy"
+
+  #Federation Routes
+  get '/federation/dashboard' => "junior_enterprises#search"
 
   #Users Routes
 
