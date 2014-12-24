@@ -89,12 +89,12 @@
                         </div>
                       <% end %>
                     </div>
+                    <div class="bio-graph-heading" style="padding: 3px; border-radius: 3px;"></div>
                     <div class="row">
-                      <div class="col-lg-6 col-lg-offset-6">
+                      <div class="col-lg-6">
                           <div class="panel">
                               <div class="panel-body">
                                   <div class="bio-desk">
-                                      <h4>Mapa</h4>
                                       <iframe
                                         width="400"
                                         height="300"
@@ -104,7 +104,18 @@
                                   </div>
                               </div>
                           </div>
-                      </div>                                
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="panel">
+                          <% if @junior_enterprise.seal %>
+                            <div class="panel-body">
+                              <div id="seal" class="bio-desk" rel="tooltip" title="A <%= @junior_enterprise.name %> tem o Selo Empresa Junior, garantindo ... .">
+                                <%= image_tag("seal.png") %>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>                               
                     </div>                           
                   </div>
                   <% if @junior_enterprise.members.count > 0 %>
@@ -181,6 +192,7 @@
   </div>
 </div>
 <script>
+  $("#seal[rel='tooltip']").tooltip();
   $(function(){
     $("#message_email").inputmask({ alias: "email"});
     $("#message_phone").inputmask("(99)9999-9999");

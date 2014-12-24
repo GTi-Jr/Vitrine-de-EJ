@@ -35,9 +35,9 @@
                       <button onclick="window.location.href='/junior_enterprise/<%= je.id %>'" class="btn btn-success" data-toggle="button"><i class="fa fa-plus"></i> </button>
 
                       <% if je.seal %>
-                        <button onclick="window.location.href='/junior_enterprises/<%= je.id %>/seal'" class="btn btn-info" data-toggle="button"> Ativar Selo EJ</button>
-                      <% else%>
                         <button onclick="window.location.href='/junior_enterprises/<%= je.id %>/seal'" class="btn btn-danger" data-toggle="button"> Desativar Selo EJ</button>
+                      <% else%>
+                        <button onclick="window.location.href='/junior_enterprises/<%= je.id %>/seal'" class="btn btn-info" data-toggle="button"> Ativar Selo EJ</button>
                       <% end %>
                     </div>
                   </div>
