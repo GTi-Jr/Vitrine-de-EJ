@@ -9,6 +9,9 @@ class SessionController < ApplicationController
   def new
   end
 
+  def help
+  end
+
   def create
     result = HTTParty.get("http://jeapi.herokuapp.com/log_in", 
     :body => { password: params[:password], email: params[:email]},

@@ -1,32 +1,5 @@
 <%= stylesheet_link_tag "landingpage" %>
-<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<nav class="navbar navbar-default navbar-xs" role="navigation" style="margin-bottom: 2px;">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#" style="font-family: Pacifico;" ><b>Vitrine</b></a>
-  </div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li><a href="/"><i class="glyphicon"></i></a></li>
-      <li><a href="/log_in"><i class="fa fa-sign-in"></i> Login</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="/explanation">Ver Explicação sobre Empresas Juniores</a></li>
-          <li class="divider"></li>
-          <li><a href="/log_in">Fazer Log-In</a></li>
-          <li class="divider"></li>
-          <li><a href="/feedback">Dar Feedback</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
+<%= render 'layouts/minimenu' %>
 <div class="intro-header">
     <div class="container">
         <div class="row">
