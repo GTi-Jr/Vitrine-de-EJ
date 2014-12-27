@@ -75,7 +75,13 @@
                                 <tr>
                                   <td align="right">Tipo</td>
                                   <td align="left">
-                                    <%= select_tag "user[function]", "<option value='user'>Usuário</option><option value='admin'>Administrador</option>".html_safe, class: 'form-control' %>
+                                    <%= select_tag "user[function]", "<option value='user'>Usuário</option><option value='admin'>Administrador</option><option value='federation'>Federação</option>".html_safe, class: 'form-control' %>
+                                  </td>
+                                </tr>
+                                <tr id="hidden_select" >
+                                  <td align="right">Estado</td>
+                                  <td align="left">
+                                    <%= select_tag "user[state]", "<option></option><option>Acre</option><option>Alagoas</option><option>Amapá</option><option>Amazonas</option><option>Bahia</option><option>Ceará</option><option>Distrito Federal</option><option>Espirito Santo</option><option>Goiás</option><option>Maranhão</option><option>Mato Grosso</option><option>Mato Grosso do Sul</option><option>Minas Gerais</option><option>Pará</option><option>Paraíba</option><option>Paraná</option><option>Pernambuco</option><option>Piauí</option><option>Rio de Janeiro</option><option>Rio Grande do Norte</option><option>Rio Grande do Sul</option><option>Rondônia</option><option>Roraima</option><option>Santa Catarina</option><option>São Paulo</option><option>Sergipe</option><option>Tocantins</option>".html_safe, class: 'form-control' %>
                                   </td>
                                 </tr>
                               </tbody>
@@ -101,5 +107,21 @@
     </div>
 </div>
 <script>
+  $('#hidden_select').hide();
   $("#user_email").inputmask({ alias: "email"});
+</script>
+
+<script type="text/javascript">
+$('#user_function').bind('change', function(event) {
+  var i = $('#user_function').val();
+
+  if(i=="federation")
+   {    
+    $("#hidden_select").fadeIn(500);
+   }
+ else
+   {        
+    $("#hidden_select").fadeOut(500);
+   }
+});
 </script>

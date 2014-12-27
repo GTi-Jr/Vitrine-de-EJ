@@ -1,13 +1,11 @@
 class JuniorEnterprisesController < ApplicationController
   before_action :number_of_messages, only: [:members, :edit, :dashboard]
 
-  # GET /junior_enterprises
-  # GET /junior_enterprises.json
   def index
     @junior_enterprises = []
 
-    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises",
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result.body).each do |junior_enterprise|
       je = OpenStruct.new(junior_enterprise)
@@ -22,19 +20,22 @@ class JuniorEnterprisesController < ApplicationController
     end 
   end
 
-  # GET /junior_enterprises/1
-  # GET /junior_enterprises/1.json
-  def show    
+  def show
+    /Set @current_user if there is a user loged in/
+    current_user
+
     @message = Message.new
 
-    result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}", 
-    :body => { :token => JEAPI_KEY })
+    is_federation?(@current_user) ? (@access = "1") : (@access = "0")
+
+    result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}",
+    :headers => { 'token' => JEAPI_KEY, 'access' => @access } )
 
     @junior_enterprise = OpenStruct.new(ActiveSupport::JSON.decode(result_je.body))
 
 
-    result_user = HTTParty.get("http://jeapi.herokuapp.com/users/#{@junior_enterprise.user_id}", 
-    :body => { :token => JEAPI_KEY })
+    result_user = HTTParty.get("http://jeapi.herokuapp.com/users/#{@junior_enterprise.user_id}",
+    :headers => { 'token' => JEAPI_KEY } )
 
     @user = OpenStruct.new(ActiveSupport::JSON.decode(result_user.body))
 
@@ -46,13 +47,17 @@ class JuniorEnterprisesController < ApplicationController
     if ( !@junior_enterprise.state.blank? && !@junior_enterprise.city.blank? && !@junior_enterprise.address.blank?)
       @mapAddress = streeAddress + "," + @junior_enterprise.city.tr(" ", "+") + "," + @junior_enterprise.state.tr(" ", "+")
     end
+
+    if is_federation?(@current_user)
+      render template: "federation/junior_enterprise_show"
+    end 
   end
 
-  # GET /junior_enterprises/new
   def new
     @junior_enterprise = JuniorEnterprise.new
     if is_admin?
       render template: "admin/junior_enterprise_new"
+    elsif is_federation?
     end 
   end
 
@@ -60,13 +65,10 @@ class JuniorEnterprisesController < ApplicationController
   def edit
     current_user
 
-    if is_admin?(@current_user)     
-      result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}", 
-      :body => { :token => JEAPI_KEY })
-    else      
-      result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{@current_user.junior_enterprise.id}", 
-      :body => { :token => JEAPI_KEY })
-    end
+    is_admin?(@current_user) ? (@id = params[:id]) : (@id = current_user.junior_enterprise.id)
+
+    result = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{@id}",
+    :headers => { 'token' => JEAPI_KEY } )
 
     //
     hash = ActiveSupport::JSON.decode(result.body)
@@ -90,7 +92,8 @@ class JuniorEnterprisesController < ApplicationController
     is_admin? ? (@user_id = @junior_enterprise.id) : (@user_id = current_user.id) 
 
     result = HTTParty.post("http://jeapi.herokuapp.com/junior_enterprises",
-    :body => {:name => @junior_enterprise.name, :user_id => @user_id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training, :token => JEAPI_KEY  })
+    :body => {:name => @junior_enterprise.name, :user_id => @user_id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training},
+    :headers => { 'token' => JEAPI_KEY } )
     
     @junior_enterprise.destroy
     if result.code == 201
@@ -113,7 +116,8 @@ class JuniorEnterprisesController < ApplicationController
     is_admin?(@current_user) ? @user_id = @junior_enterprise.user_id : @user_id = @current_user.id
 
     result = HTTParty.put("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}",
-    :body => {:name => @junior_enterprise.name, :user_id => @user_id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training, :token => JEAPI_KEY  })
+    :body => {:name => @junior_enterprise.name, :user_id => @user_id, :logo => @junior_enterprise.logo_url.to_s , :description => @junior_enterprise.description, :phrase => @junior_enterprise.phrase, :phrase => @junior_enterprise.phrase, :site => @junior_enterprise.site, :phone => @junior_enterprise.phone, :city => @junior_enterprise.city, :state => @junior_enterprise.state, :youtube => @junior_enterprise.youtube, :facebook => @junior_enterprise.facebook, :course => @junior_enterprise.course, :area => @junior_enterprise.area, :address => @junior_enterprise.address, :consultor => @junior_enterprise.consultor, :product => @junior_enterprise.product, :access => 0, :project => @junior_enterprise.project, :training => @junior_enterprise.training },
+    :headers => { 'token' => JEAPI_KEY } )
     
     @junior_enterprise.destroy
     if result.code == 204      
@@ -131,8 +135,8 @@ class JuniorEnterprisesController < ApplicationController
   # DELETE /junior_enterprises/1
   # DELETE /junior_enterprises/1.json
   def destroy
-    result = HTTParty.delete("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}", 
-    :body => { :token => JEAPI_KEY })
+    result = HTTParty.delete("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}",
+    :headers => { 'token' => JEAPI_KEY } )
 
     if is_admin? 
       redirect_to "/admin/junior_enterprises", notice: "Deletado com sucesso"
@@ -149,17 +153,27 @@ class JuniorEnterprisesController < ApplicationController
   end
 
   def search
+    current_user
     @je = []
+
+    if is_federation?(@current_user)
+      params[:state] = @current_user.state
+    end 
 
     result = HTTParty.get("http://jeapi.herokuapp.com/search", 
     :body => { :name => params[:name], :state => params[:state], :area => params[:area], :consultor => params[:consultor],
-              :project => params[:project], :training => params[:training], :product => params[:product], :token => JEAPI_KEY })
+              :project => params[:project], :training => params[:training], :product => params[:product] },
+    :headers => { 'token' => JEAPI_KEY } )
 
     ActiveSupport::JSON.decode(result.body).each do |junior_enterprise|
       @je << OpenStruct.new(junior_enterprise)
     end
 
     @je = Kaminari.paginate_array(@je).page(params[:page]).per(10)
+
+    if is_federation?(@current_user)
+      render template: "federation/junior_enterprise_index"
+    end 
   end
 
   def messages
@@ -169,14 +183,25 @@ class JuniorEnterprisesController < ApplicationController
     @messages = Kaminari.paginate_array(@current_user.junior_enterprise.messages).page(params[:page]).per(10)
 
     result = HTTParty.put("http://jeapi.herokuapp.com/messages/read",
-    :body => {:id => @current_user.junior_enterprise.id, :token => JEAPI_KEY  })
+    :body => {:id => @current_user.junior_enterprise.id },
+    :headers => { 'token' => JEAPI_KEY } )
+  end
+
+  def seal
+    current_user
+    if is_federation?(@current_user)
+      result = HTTParty.post("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}/seal",
+      :headers => { 'token' => JEAPI_KEY } )
+
+      redirect_to "/federation/dashboard"
+    end 
   end
 
   private
     def set_junior_enterprise
       if is_admin?
-        result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}", 
-        :body => { :token => JEAPI_KEY })
+        result_je = HTTParty.get("http://jeapi.herokuapp.com/junior_enterprises/#{params[:id]}",
+        :headers => { 'token' => JEAPI_KEY } )
 
         @junior_enterprise = OpenStruct.new(ActiveSupport::JSON.decode(result_je.body))
       else

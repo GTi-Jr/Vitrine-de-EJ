@@ -104,7 +104,8 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div>   
+
                       <div class="col-lg-6">
                         <div class="panel">
                           <% if @junior_enterprise.seal %>
@@ -115,7 +116,7 @@
                             </div>
                           <% end %>
                         </div>
-                      </div>                               
+                      </div>                             
                     </div>                           
                   </div>
                   <% if @junior_enterprise.members.count > 0 %>
@@ -144,43 +145,6 @@
                       </div>
                     </div>
                   <% end %>
-                  <div id="messages" class="tab-pane">
-                    <div class="panel-body bio-graph-info">
-                              <h1> Entre em contato </h1>
-                              <%= form_for @message, url: "/messages/#{@junior_enterprise.id}", :html => { :method => :post }  do |f| %>
-                                <div class="form-group">
-                                      <label class="col-lg-2 control-label"> Mensagem </label>
-                                      <div class="col-lg-10">
-                                          <textarea rows="10" cols="30" class="form-control" id="message[text]" name="message[text]" style="margin-bottom: 10px;"></textarea>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-lg-2 control-label">Nome</label>
-                                      <div class="col-lg-10">
-                                          <%= f.text_field :name, class: "form-control", placeholder: "Nome", style:"margin-bottom: 10px;" %>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-lg-2 control-label">E-mail</label>
-                                      <div class="col-lg-10">
-                                          <%= f.text_field :email, class: "form-control", placeholder: "E-mail", style:"margin-bottom: 10px;"  %>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-lg-2 control-label">Telefone</label>
-                                      <div class="col-lg-10">
-                                          <%= f.text_field :phone, class: "form-control", placeholder: "Telefone", style:"margin-bottom: 10px;"  %>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <div class="col-lg-offset-2 col-lg-10">
-                                          <button class="btn btn-info" type="submit">Enviar</button>
-                                      </div>
-                                  </div>
-                              <% end %>
-                          </div>
-
-                  </div>
                 </div>
               </div>              
             <a href="/find" class="btn btn-info btn-block" style="width: 10%; margin-left: 1%;">Retornar</a>
@@ -193,8 +157,4 @@
 </div>
 <script>
   $("#seal[rel='tooltip']").tooltip();
-  $(function(){
-    $("#message_email").inputmask({ alias: "email"});
-    $("#message_phone").inputmask("(99)9999-9999");
-  })
 </script>

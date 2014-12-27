@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207062347) do
+ActiveRecord::Schema.define(version: 20141222091816) do
 
   create_table "junior_enterprises", force: true do |t|
     t.string   "name"
@@ -65,12 +65,7 @@ ActiveRecord::Schema.define(version: 20141207062347) do
 
   add_index "messages", ["junior_enterprise_id"], name: "index_messages_on_junior_enterprise_id"
 
-  create_table "users", force: true do |t|
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "function"
-    t.string   "email"
-  end
+# Could not dump table "users" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
 end

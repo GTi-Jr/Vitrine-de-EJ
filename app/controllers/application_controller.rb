@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   private
   def current_user
     unless session[:user_id].blank?
-      result = HTTParty.get("http://jeapi.herokuapp.com/users/#{session[:user_id]}", 
-      :body => { :token => JEAPI_KEY })
+      result = HTTParty.get("http://jeapi.herokuapp.com/users/#{session[:user_id]}", :headers => { 'token' => JEAPI_KEY } )
 
       @current_user = OpenStruct.new(ActiveSupport::JSON.decode(result.body))
       if !@current_user.junior_enterprise.blank?
@@ -36,6 +35,17 @@ class ApplicationController < ActionController::Base
   end
   helper_method :is_admin?
 
+  def is_federation?(object = current_user)
+    if object != nil
+      if object.function == "federation"
+        return true
+      end
+    end
+
+    return false
+  end
+  helper_method :is_federation?
+
   def number_of_messages
     current_user
     if !@current_user.junior_enterprise.blank?
@@ -58,7 +68,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :check_and_redirect
 
-    def check_admin_and_redirect
+  def check_admin_and_redirect
     if current_user == nil
       redirect_to "/log_in", :notice => "Entre como um Administrador"
     else
@@ -67,5 +77,4 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  helper_method :check_admin_and_redirect
 end
