@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222091816) do
+ActiveRecord::Schema.define(version: 20141227082622) do
 
   create_table "junior_enterprises", force: true do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20141222091816) do
     t.integer  "access"
     t.boolean  "project"
     t.boolean  "training"
+    t.boolean  "seal"
   end
 
   add_index "junior_enterprises", ["user_id"], name: "index_junior_enterprises_on_user_id"
