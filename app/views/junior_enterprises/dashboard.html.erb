@@ -1,13 +1,12 @@
+<%= render 'layouts/headmenu' %>
 <div id="layout-container">
-  <%= render 'layouts/lateralmenu' %>
   <div id="main">  
-    <%= render 'layouts/headmenu' %>
+      <div class="head-title"></div>
       <div class="margin-container">
         <div class="scrollable wrapper">
           <div class="row">
             <div class="col-md-12">
               <div class="page-heading">
-                <h1>Perfil</h1>
               </div>
             </div>
           </div>
@@ -15,7 +14,7 @@
                     <div class="profile-info col-lg-9 col-lg-offset-1">                        
                         <div class="panel">
                             <div class="bio-graph-heading">
-                               <%= @current_user.junior_enterprise.phrase %> 
+                              <h3> <%= @current_user.junior_enterprise.phrase %> </h3>
                             </div>
                             <div class="panel-body bio-graph-info">
                                 <h1><%= @current_user.junior_enterprise.name %></h1>

@@ -211,6 +211,6 @@ class JuniorEnterprisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def junior_enterprise_params
-      params.require(:junior_enterprise).permit(:access, :user_id,:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area, :address, :training, :consultor, :product, :project)
+      params.require(:junior_enterprise).permit(:seal ,:access, :user_id,:name, :logo, :description, :phrase, :site, :phone, :city, :state, :facebook, :youtube, :course, :area, :address, :training, :consultor, :product, :project)
     end
 end

@@ -1,25 +1,26 @@
-<div class="head-title">
-  <div class="menu-switch"><i class="fa fa-bars"></i></div>
-  <div class="row">
-    <div class="col-md-12">
-      <ul class="user-info pull-right fadeInLeftBig animated">
-        <li class="profile-info dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <img class="img-circle" alt="" style="width:64px; height:64px; border-radius:50%;" src="<%= @current_user.junior_enterprise.logo %>"><%= @current_user.junior_enterprise.name %></a>
-        </li>
-      </ul>
-      <% if @number_of_messages > 0 %>
-	      <ul class="nav top-menu hidden-xs notify-row fadeInRightBig animated">
-	        <li class="dropdown" id="header_inbox_bar"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span class="badge bg-important"><%= @number_of_messages %></span> </a>
-	          <ul class="dropdown-menu extended inbox">
-	            <div class="notify-arrow notify-arrow-red"></div>
-	            <li>
-	              <p class="red">Você tem <%= @number_of_messages %> novas mensagens </p>
-	            </li>                
-	            <li class="external"> <a href="/messages">Ver mensagens</a> </li>
-	          </ul>
-	        </li>
-	      </ul>
-	     <% end %>
-    </div>
+<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<nav class="navbar navbar-default navbar-xs" role="navigation" style="margin-bottom: 2px;">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/" style="font-family: Pacifico;" ><b>Vitrine</b></a>
   </div>
-</div>
-
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/"><i class="glyphicon"></i></a></li>
+      <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
+      <li><a href="/junior_enterprises/edit"><i class="fa fa-edit"></i> Editar</a></li>
+      <% if @number_of_messages > 0 %>
+      	<li><a href="/messages"><i class="fa"><%= @number_of_messages %></i> Mensagens</a></li>
+      <% else %>      
+      	<li><a href="/messages"><i class="fa fa-envelope"></i> Mensagens</a></li>
+      <% end %>
+      <li><a href="/members"><i class="fa fa-group"></i> Membros</a></li>
+      <li><a href="/log_out"><i class="fa fa-sign-out"></i> Log-Out</a></li>      
+    </ul>
+  </div>
+</nav>

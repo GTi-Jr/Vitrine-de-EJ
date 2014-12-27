@@ -24,7 +24,7 @@
 }
 @media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 #main {
-	left: 100px!important;
+	left: 3px!important;
 	position: absolute!important;
 }
 .menu-switch {
@@ -36,7 +36,7 @@
 }
 @media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
 #main {
-	left: 100px!important;
+	left: 3px!important;
 	position: absolute!important;
 }
 .menu-switch {
@@ -48,7 +48,7 @@
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
 #main {
-	left: 100px!important;
+	left: 3px!important;
 	position: absolute!important;
 }
 .menu-switch {
@@ -60,7 +60,7 @@
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */
 #main {
-	left: 100px!important;
+	left: 3px!important;
 	position: absolute!important;
 }
 .menu-switch {

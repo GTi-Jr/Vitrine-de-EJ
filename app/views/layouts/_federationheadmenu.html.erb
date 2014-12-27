@@ -1,11 +1,19 @@
-<div class="head-title">
-  <div class="menu-switch"><i class="fa fa-bars"></i></div>
-  <div class="row">
-    <div class="col-md-12">
-      <ul class="nav top-menu hidden-xs notify-row pull-right ">
-        <li class="dropdown" id="header_notification_bar"> <a href="#" onclick="window.location.href='/log_out'"  class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-sign-out"></i>Log-Out</a>
-        </li>
-      </ul>
-    </div> 
+<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<nav class="navbar navbar-default navbar-xs" role="navigation" style="margin-bottom: 2px;">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/" style="font-family: Pacifico;" ><b>Vitrine</b></a>
   </div>
-</div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/"><i class="glyphicon"></i></a></li>
+      <li><a href="/federation/dashboard"><i class="fa fa-group"></i> Empresas</a></li>
+      <li><a href="/log_out"><i class="fa fa-sign-out"></i> Log-Out</a></li>      
+    </ul>
+  </div>
+</nav>

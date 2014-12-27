@@ -1,34 +1,23 @@
+<%= render 'layouts/headmenu' %>
 <div id="layout-container">
-  <%= render 'layouts/lateralmenu' %>
   <div id="main">  
-    <%= render 'layouts/headmenu' %>
+      <div class="head-title"></div>
       <div class="margin-container">
         <div class="scrollable wrapper">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="page-heading">
-                <h1>Editando</h1>
+  <div class="row">
+    <div class="col-md-12">
+    </div>
+  </div>
+  <div class="row">
+        <div class="profile-info col-lg-9 col-lg-offset-1">                        
+            <div class="panel">
+              <div class="bio-graph-heading">
+                <h3> Mensagens </h3>
               </div>
-            </div>
-          </div>
-      <div class="row">
-        <div class="col-md-9">
-          <div class="box-info">
-            <table align="center" border="0" cellpadding="0" cellspacing="0">
-              <tbody>
-              <tr>
-                <td>
-                  <div>
-                    <div id="wizard" class="swMain">
-                        <%= form_for @junior_enterprise, url: update_junior_enterprise_path(@junior_enterprise.id), :html => { :method => :put }  do |f| %>
-                          <ul class="anchor">
-                            <li>
-                              <a class="selected">
-                                <span class="stepNumber">1</span>
-                                <span class="stepDesc">Dados<br></span>
-                              </a>
-                            </li>
-                          </ul>
+              <div class="panel-body bio-graph-info">
+                <%= form_for @junior_enterprise, url: update_junior_enterprise_path(@junior_enterprise.id), :html => { :method => :put }  do |f| %>
+                        <div id="wizard" class="swMain">
+                          <div class="bio-graph-heading" style="padding: 15px;margin-left: 30px;margin-right: 30px;"> 1. Dados </div>
                           <div id="step-1" style="display: block; left: 0px;">
                             <table cellspacing="3" cellpadding="3" align="center">
                               <tbody>
@@ -67,6 +56,7 @@
                                   <td align="left">                                    
                                     <%= select_tag('junior_enterprise[state]', options_for_select([['Acre'],['Alagoas'], ['Amapá'], ['Amazonas'], ['Bahia'], ['Ceará'], ['Distrito Federal'], ['Espirito Santo'], ['Goiás'], ['Maranhão'], ['Mato Grosso'], ['Mato Grosso do Sul'], ['Minas Gerais'], ['Pará'], ['Paraíba'], ['Paraná'], ['Pernambuco'], ['Piauí'], ['Rio de Janeiro'], ['Rio Grande do Norte'], ['Rio Grande do Sul'], ['Rondônia'], ['Roraima'], ['Santa Catarina'], ['São Paulo'], ['Sergipe'], ['Tocantins']], selected: @junior_enterprise.state )) %>
                                   </td>
+                                </tr>
                                 <tr>
                                   <td align="right">Cidade :</td>
                                   <td align="left">
@@ -85,14 +75,7 @@
                           </div>
                           <br>
 
-                          <ul class="anchor">
-                            <li>
-                              <a class="selected">
-                                <span class="stepNumber">2</span>
-                                <span class="stepDesc">Detalhes<br></span>
-                              </a>
-                            </li>
-                          </ul>
+                          <div class="bio-graph-heading" style="padding: 15px;margin-left: 30px;margin-right: 30px;"> 2. Detalhes </div>
                           <div id="step-1" style="display: block; left: 0px;">
                             <table cellspacing="3" cellpadding="3" align="center">
                               <tbody>
@@ -140,14 +123,8 @@
                           </div>
                           <br>
 
-                          <ul class="anchor">
-                            <li>
-                              <a class="selected">
-                                <span class="stepNumber">3</span>
-                                <span class="stepDesc">Arquivos<br></span>
-                              </a>
-                            </li>
-                          </ul>
+                          
+                          <div class="bio-graph-heading" style="padding: 15px;margin-left: 30px;margin-right: 30px;"> 3. Arquivos </div>
                           <div id="step-1" style="display: block; left: 0px;">
                             <table cellspacing="3" cellpadding="3" align="center">
                               <tbody>
@@ -169,15 +146,13 @@
                           <div class="actionBar">
                             <button type="submit"  class="buttonFinish">Atualizar</button>
                           </div>
-                        <% end %>                        
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        </div>
+                        <% end %> 
               </div>
             </div>
-          </div>   
         </div>
+    </div>   
+</div>
       </div>
     </div>
 </div>
@@ -189,3 +164,5 @@ $(function(){
   $("#junior_enterprise_phone").inputmask("(99)9999-9999");
 })
 </script>
+
+
