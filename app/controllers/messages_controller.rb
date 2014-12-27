@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
     @messages = Kaminari.paginate_array(@messages).page(params[:page]).per(10)
     
     if is_admin? 
-      render template: "admin/message_index")      
+      render template: "admin/message_index"  
     elsif is_federation?
 
     end

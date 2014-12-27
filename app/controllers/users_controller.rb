@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     :headers => { 'token' => JEAPI_KEY })
 
     if result.code == 200
-      redirect_to :back, :notice => "Um e-mail foi enviado com sua nova senha"
+      redirect_to "/log_in", :notice => "Um e-mail foi enviado com sua nova senha"
     else
       redirect_to :back, :alert => "E-mail não cadastrado"     
     end

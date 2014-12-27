@@ -23,7 +23,7 @@ class SessionController < ApplicationController
       session[:user_id] = user.id
       if is_admin? 
         redirect_to "/admin/users", :notice => "Logged in!"
-      elsif        
+      elsif is_federation?       
         redirect_to "/federation/dashboard", :notice => "Logged in!"
       else
         redirect_to dashboard_path, :notice => "Logged in!"

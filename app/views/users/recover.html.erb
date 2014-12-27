@@ -17,15 +17,6 @@
     </div>
   </div>
 </div>
-<%= error_toastr(@errors) %>
-
-<% if !flash[:alert].blank? %>
-  <%= toastr(flash[:alert], "error") %>
-<% end %>
-
-<% if !flash[:notice].blank? %>
-  <%= toastr(flash[:notice], "success") %>
-<% end %>
 
 <script>
   $("#email").inputmask({ alias: "email"});
