@@ -23,4 +23,10 @@ module ApplicationHelper
 			return "Usuário"
 		end
 	end
+
+	def messages_alert
+		if number_of_messages > 0
+			render inline: javascript_tag("toastr.info('','Novas mensagens - #{number_of_messages}')") 
+		end
+	end
 end

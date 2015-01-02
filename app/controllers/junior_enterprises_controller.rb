@@ -182,8 +182,7 @@ class JuniorEnterprisesController < ApplicationController
 
     @messages = Kaminari.paginate_array(@current_user.junior_enterprise.messages).page(params[:page]).per(10)
 
-    result = HTTParty.put("http://jeapi.herokuapp.com/messages/read",
-    :body => {:id => @current_user.junior_enterprise.id },
+    result = HTTParty.put("http://jeapi.herokuapp.com/messages/read/#{@current_user.junior_enterprise.id}",
     :headers => { 'token' => JEAPI_KEY } )
   end
 
