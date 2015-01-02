@@ -13,12 +13,8 @@
     <ul class="nav navbar-nav">
       <li><a href="/"><i class="glyphicon"></i></a></li>
       <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
-      <li><a href="/junior_enterprises/edit"><i class="fa fa-edit"></i> Editar</a></li>
-      <% if @number_of_messages > 0 %>
-      	<li><a href="/messages"><i class="fa"><%= @number_of_messages %></i> Mensagens</a></li>
-      <% else %>      
-      	<li><a href="/messages"><i class="fa fa-envelope"></i> Mensagens</a></li>
-      <% end %>
+      <li><a href="/junior_enterprises/edit"><i class="fa fa-edit"></i> Editar</a></li>     
+    	<li><a href="/messages"><i class="fa fa-envelope"></i> Mensagens</a></li>
       <li><a href="/members"><i class="fa fa-group"></i> Membros</a></li>
       <li><a href="/log_out"><i class="fa fa-sign-out"></i> Log-Out</a></li>      
     </ul>

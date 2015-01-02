@@ -52,12 +52,12 @@ class ApplicationController < ActionController::Base
       if !@current_user.junior_enterprise.messages.blank?
         i = 0
         @current_user.junior_enterprise.messages.each do |m|
-          m["read"] == false ? i=i+1 : 0
+          m["read"] == false ? i = i+1 : 0
         end
       end
     end
 
-    @number_of_messages ||= 0
+    return i
   end 
   helper_method :number_of_messages
 
